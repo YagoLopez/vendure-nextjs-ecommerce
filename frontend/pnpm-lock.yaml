@@ -59,41 +59,6 @@ importers:
       taskr-swc: link:../taskr-swc
       typescript: 4.8.3
 
-  packages/local:
-    specifiers:
-      '@taskr/clear': ^1.1.0
-      '@taskr/esnext': ^1.1.0
-      '@taskr/watch': ^1.1.0
-      '@types/node': ^17.0.8
-      '@types/node-fetch': 2.6.2
-      '@types/react': ^18.0.14
-      '@vercel/commerce': workspace:*
-      lint-staged: ^12.1.7
-      next: ^13.0.6
-      prettier: ^2.5.1
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      taskr: ^1.1.0
-      taskr-swc: ^0.0.1
-      typescript: ^4.7.4
-    dependencies:
-      '@vercel/commerce': link:../commerce
-    devDependencies:
-      '@taskr/clear': 1.1.0
-      '@taskr/esnext': 1.1.0
-      '@taskr/watch': 1.1.0
-      '@types/node': 17.0.45
-      '@types/node-fetch': 2.6.2
-      '@types/react': 18.0.20
-      lint-staged: 12.5.0
-      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
-      prettier: 2.7.1
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      taskr: 1.1.0
-      taskr-swc: link:../taskr-swc
-      typescript: 4.8.3
-
   packages/taskr-swc:
     specifiers:
       '@swc/core': ^1.2.138
@@ -162,7 +127,6 @@ importers:
       '@types/react': ^18.0.20
       '@types/react-dom': ^18.0.6
       '@vercel/commerce': workspace:*
-      '@vercel/commerce-local': workspace:*
       '@vercel/commerce-vendure': workspace:*
       autoprefixer: ^10.4.2
       body-scroll-lock: ^4.0.0-beta.0
@@ -195,7 +159,6 @@ importers:
       '@radix-ui/react-dropdown-menu': 1.0.0_7ey2zzynotv32rpkwno45fsx4e
       '@react-spring/web': 9.5.4_biqbaboplfbrettd7655fr4n2y
       '@vercel/commerce': link:../packages/commerce
-      '@vercel/commerce-local': link:../packages/local
       '@vercel/commerce-vendure': link:../packages/vendure
       autoprefixer: 10.4.10_postcss@8.4.16
       body-scroll-lock: 4.0.0-beta.0
@@ -3097,6 +3060,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -4472,6 +4436,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -6056,6 +6021,7 @@ packages:
 
   /nan/2.16.0:
     resolution: {integrity: sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==}
+    requiresBuild: true
     dev: true
     optional: true
 
