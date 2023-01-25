@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:backend": "yarn --cwd backend dev",
-    "start:frontend": "yarn --cwd frontend/site dev",
-    "start:all": "run-p start:backend start:frontend"
+    "dev:backend:run": "yarn --cwd backend dev",
+    "dev:frontend:run": "yarn --cwd frontend/site dev",
+    "dev:run:all": "run-p dev:backend:run dev:frontend:run",
+    "prod:build:frontend": "yarn --cwd frontend build",
+    "prod:run:backend": "yarn --cwd backend start",
+    "prod:run:frontend": "yarn --cwd frontend/site start",
+    "prod:run:all": "run-p prod:build:frontend prod:run:frontend prod:run:backend"
   },
   "author": "Yago López",
   "license": "ISC",
