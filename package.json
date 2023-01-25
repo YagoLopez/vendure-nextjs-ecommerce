@@ -7,10 +7,13 @@
     "dev:backend:run": "yarn --cwd backend dev",
     "dev:frontend:run": "yarn --cwd frontend/site dev",
     "dev:run:all": "run-p dev:backend:run dev:frontend:run",
+    "prod:build:backend": "yarn --cwd backend build",
     "prod:build:frontend": "yarn --cwd frontend build",
+    "prod:build:frontend:backend": "run-s prod:build:backend prod:build:frontend",
     "prod:run:backend": "yarn --cwd backend start",
     "prod:run:frontend": "yarn --cwd frontend/site start",
-    "prod:run:all": "run-p prod:build:frontend prod:run:frontend prod:run:backend"
+    "prod:run:frontend:backend": "run-p prod:run:frontend prod:run:backend",
+    "prod:build:run:frontend:backend": "run-s prod:build:frontend:backend prod:run:frontend:backend"
   },
   "author": "Yago López",
   "license": "ISC",
