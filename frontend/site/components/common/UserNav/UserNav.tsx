@@ -1,7 +1,6 @@
 import cn from 'clsx'
 import Link from 'next/link'
 import s from './UserNav.module.css'
-import { Avatar } from '@components/common'
 import useCart from '@framework/cart/use-cart'
 import { useUI } from '@components/ui/context'
 import { Heart, Bag, Menu } from '@components/icons'
@@ -14,9 +13,7 @@ import {
   Button,
 } from '@components/ui'
 
-import type { LineItem } from '@commerce/types/cart'
-
-const countItem = (count: number, item: LineItem) => count + item.quantity
+import UserIcon from '@components/icons/UserIcon'
 
 const UserNav: React.FC<{
   className?: string
@@ -24,17 +21,18 @@ const UserNav: React.FC<{
   const { data } = useCart()
   const { data: isCustomerLoggedIn } = useCustomer()
   const {
-    toggleSidebar,
     closeSidebarIfPresent,
     openModal,
     setSidebarView,
     openSidebar,
   } = useUI()
 
-  const itemsCount = data?.lineItems?.reduce(countItem, 0) ?? 0
+  const itemsCount = data?.lineItems?.length ?? 0
   const DropdownTrigger = isCustomerLoggedIn
     ? DropdownTriggerInst
     : React.Fragment
+
+  const onClickLoginButton = () => isCustomerLoggedIn ? null : openModal()
 
   return (
     <nav className={cn(s.root, className)}>
@@ -73,9 +71,9 @@ const UserNav: React.FC<{
                 <button
                   aria-label="Menu"
                   className={s.avatarButton}
-                  onClick={() => (isCustomerLoggedIn ? null : openModal())}
+                  onClick={onClickLoginButton}
                 >
-                  <Avatar />
+                  <UserIcon isCustomerLoggedIn={Boolean(isCustomerLoggedIn)} />
                 </button>
               </DropdownTrigger>
               <CustomerMenuContent />

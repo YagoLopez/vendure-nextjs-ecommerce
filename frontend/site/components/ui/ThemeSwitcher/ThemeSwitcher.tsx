@@ -41,10 +41,10 @@ const ThemeSwitcher = () => {
           {themes.length && display ? (
             <div
               className={
-                'fixed shadow-lg right-0 top-12 mt-2 origin-top-right w-full h-full outline-none bg-accent-0 z-40 lg:absolute lg:border lg:border-accent-1 lg:shadow-lg lg:w-56 lg:h-auto'
+                'fixed shadow-lg right-0 top-0 origin-top-right w-full h-full outline-none bg-accent-0 z-40 lg:absolute lg:border lg:border-accent-1 lg:shadow-lg lg:w-56 lg:h-auto'
               }
             >
-              <div className="flex flex-row justify-end px-6">
+              <div className="flex flex-row justify-end px-6 mt-4">
                 <button
                   className="md:hidden"
                   onClick={() => setDisplay(false)}

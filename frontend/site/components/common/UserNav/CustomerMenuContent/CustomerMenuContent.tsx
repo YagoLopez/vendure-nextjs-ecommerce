@@ -62,13 +62,14 @@ export default function CustomerMenuContent() {
           }}
         >
           <div>
-            Theme: <strong>{theme}</strong>{' '}
+            {theme === 'light' && <>Theme: <strong>Dark</strong></>}
+            {theme === 'dark' && <>Theme: <strong>Light</strong></>}
           </div>
           <div className="ml-3">
             {theme == 'dark' ? (
-              <Moon width={20} height={20} />
-            ) : (
               <Sun width={20} height={20} />
+            ) : (
+              <Moon width={20} height={20} />
             )}
           </div>
         </a>
