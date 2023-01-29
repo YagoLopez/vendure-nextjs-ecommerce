@@ -32,7 +32,7 @@ export const config: VendureConfig = {
         } : {}),
     },
     authOptions: {
-        tokenMethod: ['bearer', 'cookie'],
+        tokenMethod: 'cookie',
         superadminCredentials: {
             identifier: process.env.SUPERADMIN_USERNAME,
             password: process.env.SUPERADMIN_PASSWORD,

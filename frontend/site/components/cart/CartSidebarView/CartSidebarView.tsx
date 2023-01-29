@@ -114,7 +114,7 @@ const CartSidebarView: FC = () => {
                   Proceed to Checkout ({total})
                 </Button>
               ) : (
-                <Button href="/checkout" Component="a" width="100%">
+                <Button href="/checkoutstripe2" Component="a" width="100%">
                   Proceed to Checkout
                 </Button>
               )}

@@ -1,3 +1,4 @@
 node_modules
 dist
 static/email/test-emails
+static/assets/cache
