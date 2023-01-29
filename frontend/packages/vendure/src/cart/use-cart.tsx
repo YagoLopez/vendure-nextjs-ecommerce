@@ -1,5 +1,5 @@
 import { SWRHook } from '@vercel/commerce/utils/types'
-import useCart, { type UseCart } from '@vercel/commerce/cart/use-cart'
+import useCart, { UseCart } from '@vercel/commerce/cart/use-cart'
 import { ActiveOrderQuery, CartFragment } from '../../schema'
 import { normalizeCart } from '../utils/normalize'
 import { useMemo } from 'react'
@@ -13,6 +13,7 @@ export type CartResult = {
   removeOrderLine?: CartFragment
 }
 
+// @ts-ignore
 export default useCart as UseCart<typeof handler>
 
 export const handler: SWRHook<GetCartHook> = {

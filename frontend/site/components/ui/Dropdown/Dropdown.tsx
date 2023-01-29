@@ -6,8 +6,6 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 export const Dropdown = DropdownMenu.Root
 export const DropdownMenuItem = DropdownMenu.Item
 export const DropdownTrigger = DropdownMenu.Trigger
-export const DropdownMenuLabel = DropdownMenu.Label
-export const DropdownMenuGroup = DropdownMenu.Group
 
 export const DropdownContent = React.forwardRef<
   HTMLDivElement,
