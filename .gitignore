@@ -41,3 +41,7 @@ yarn-error.log*
 
 # Turborepo
 .turbo
+
+# Sqlite files
+/backend/vendure.sqlite-shm
+/backend/vendure.sqlite-wal

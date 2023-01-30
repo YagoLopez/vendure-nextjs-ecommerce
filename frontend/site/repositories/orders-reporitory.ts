@@ -5,18 +5,21 @@ export default class OrdersRepository {
 
   private query = gql`
     query {
-      activeOrder{
+      activeOrder {
         id
-        active
         state
-        lines{
-          productVariant{
+        lines {
+          productVariant {
             name
+            product {
+              featuredAsset {
+                source
+              }
+            }
           }
-          items{
+          items {
             unitPrice
           }
-    
         }
       }
     }
