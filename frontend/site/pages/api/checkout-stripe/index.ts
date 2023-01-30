@@ -1,10 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import OrdersRepository from '../../../repositories/orders-reporitory'
+import { getCookies } from 'cookies-next';
 
 const stripe = require('stripe')('sk_test_51MQY4aK9cXkj282noSPPEmFoIaQG4RCLF9ygKXqB66moQfPEKtSwpifb8Y9s3Vs6r1p63ttrPLQOAMtkZ7Caf53f000yT7aZge');
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-  // todo: get active order with line items
+  const cookies = getCookies({req, res});
+  const shopApiUrl = String(process.env.NEXT_PUBLIC_VENDURE_SHOP_API_URL)
+  const ordersRepository = new OrdersRepository(shopApiUrl, cookies)
+  const activeOrder = await ordersRepository.getActiveOrder()
+
+  console.log('activeOrder', activeOrder)
+  console.log('cookies', cookies)
 
   const params = {
     payment_method_types: ['card'],
@@ -31,8 +39,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   }
 
-  const session = await stripe.checkout.sessions.create(params)
-  console.log('session.url', session.url)
-  res.redirect(303, session.url);
+  // const session = await stripe.checkout.sessions.create(params)
+  // console.log('session.url', session.url)
+  // res.redirect(303, session.url);
+  res.status(200).json({cookies, activeOrder})
 }
 

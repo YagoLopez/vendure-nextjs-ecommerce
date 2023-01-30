@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:backend:run": "yarn --cwd backend dev",
-    "dev:frontend:run": "yarn --cwd frontend/site dev",
-    "dev:run:all": "run-p dev:backend:run dev:frontend:run",
+    "dev:run:backend": "yarn --cwd backend dev",
+    "dev:run:frontend": "yarn --cwd frontend/site dev",
+    "dev:run:all": "run-p dev:run:backend dev:run:frontend",
     "prod:build:backend": "yarn --cwd backend build",
     "prod:build:frontend": "yarn --cwd frontend build",
     "prod:run:backend": "yarn --cwd backend start",
@@ -14,7 +14,7 @@
     "prod:build:run:backend": "run-s prod:build:backend prod:run:backend",
     "prod:build:run:frontend": "run-s prod:build:frontend prod:run:frontend"
   },
-  "author": "Yago López",
+  "author": "yago.lopez@gmail.com",
   "license": "ISC",
   "dependencies": {
     "npm-run-all": "^4.1.5"

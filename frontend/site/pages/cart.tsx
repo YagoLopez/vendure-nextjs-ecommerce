@@ -49,6 +49,7 @@ export default function Cart() {
   }
 
   const onClick = () => {
+    // todo: review
     console.log('cart data', data)
 
     // mutation{
