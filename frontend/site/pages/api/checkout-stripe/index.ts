@@ -20,7 +20,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         productVariant: { name, currencyCode, product },
         quantity
       } = line
-
       return  {
         price_data: {
           currency: currencyCode,

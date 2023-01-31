@@ -68,13 +68,13 @@ const UserNav: React.FC<{
           <li className={s.item}>
             <Dropdown>
               <DropdownTrigger>
-                <button
+                <div
                   aria-label="Menu"
                   className={s.avatarButton}
                   onClick={onClickLoginButton}
                 >
                   <UserIcon isCustomerLoggedIn={Boolean(isCustomerLoggedIn)} />
-                </button>
+                </div>
               </DropdownTrigger>
               <CustomerMenuContent />
             </Dropdown>

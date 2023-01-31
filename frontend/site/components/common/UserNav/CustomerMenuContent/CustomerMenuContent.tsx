@@ -61,10 +61,8 @@ export default function CustomerMenuContent() {
             setTheme(theme === 'dark' ? 'light' : 'dark')
           }}
         >
-          <div>
-            {theme === 'light' && <>Theme: <strong>Dark</strong></>}
-            {theme === 'dark' && <>Theme: <strong>Light</strong></>}
-          </div>
+            {theme === 'light' && <div>Theme: <strong>Dark</strong></div>}
+            {theme === 'dark' && <div>Theme: <strong>Light</strong></div>}
           <div className="ml-3">
             {theme == 'dark' ? (
               <Sun width={20} height={20} />
