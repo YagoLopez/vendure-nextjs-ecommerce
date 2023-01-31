@@ -1,5 +1,4 @@
 import { GraphQLClient, gql } from 'graphql-request'
-import { TmpCookiesObj } from 'cookies-next/lib/types'
 
 export default class OrdersRepository {
 
@@ -25,14 +24,11 @@ export default class OrdersRepository {
     }
   `
 
-  constructor(private gqlEndpoint: string, private cookies: TmpCookiesObj) {}
+  constructor(private gqlEndpoint: string, private authCookie: string) {}
 
   async getActiveOrder(){
-    const sessionCookie =
-      `session=${this.cookies['session']}; session.sig=${this.cookies['session.sig']}`
-
     const graphQLClient = new GraphQLClient(this.gqlEndpoint, {
-      headers: { Cookie: sessionCookie },
+      headers: { cookie: this.authCookie }
     })
     return await graphQLClient.request(this.query)
   }

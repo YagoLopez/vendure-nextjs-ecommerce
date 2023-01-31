@@ -133,7 +133,6 @@ importers:
       autoprefixer: ^10.4.2
       body-scroll-lock: ^4.0.0-beta.0
       clsx: ^1.1.1
-      cookies-next: ^2.1.1
       email-validator: ^2.0.4
       eslint: ^8.6.0
       eslint-config-next: ^12.0.8
@@ -171,7 +170,6 @@ importers:
       autoprefixer: 10.4.10_postcss@8.4.16
       body-scroll-lock: 4.0.0-beta.0
       clsx: 1.2.1
-      cookies-next: 2.1.1
       email-validator: 2.0.4
       graphql: 16.6.0
       graphql-request: 5.1.0_graphql@16.6.0
@@ -2504,10 +2502,6 @@ packages:
     resolution: {integrity: sha512-3owAC4iJub5WPqRhxd8INarF2bWeQq1yQHBgYhN0XLBJMpd5ED10RrJ3aKiAwlTyL5wK7RkBD4SZUQz2AAAMdA==}
     dev: true
 
-  /@types/cookie/0.4.1:
-    resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
-    dev: false
-
   /@types/js-cookie/3.0.2:
     resolution: {integrity: sha512-6+0ekgfusHftJNYpihfkMu8BWdeHs9EOJuGcSofErjstGPfPGEu9yTu4t460lTzzAMl2cM5zngQJqPMHbbnvYA==}
     dev: true
@@ -2558,10 +2552,6 @@ packages:
       '@types/node': 17.0.45
       form-data: 3.0.1
     dev: true
-
-  /@types/node/16.18.11:
-    resolution: {integrity: sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==}
-    dev: false
 
   /@types/node/17.0.45:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
@@ -3538,19 +3528,6 @@ packages:
     dependencies:
       safe-buffer: 5.1.2
     dev: true
-
-  /cookie/0.4.2:
-    resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
-    engines: {node: '>= 0.6'}
-    dev: false
-
-  /cookies-next/2.1.1:
-    resolution: {integrity: sha512-AZGZPdL1hU3jCjN2UMJTGhLOYzNUN9Gm+v8BdptYIHUdwz397Et1p+sZRfvAl8pKnnmMdX2Pk9xDRKCGBum6GA==}
-    dependencies:
-      '@types/cookie': 0.4.1
-      '@types/node': 16.18.11
-      cookie: 0.4.2
-    dev: false
 
   /copy-descriptor/0.1.1:
     resolution: {integrity: sha512-XgZ0pFcakEUlbwQEVNg3+QAis1FyTL3Qel9FYy8pSkQqoG3PNoT0bOCQtOXcOkur21r2Eq2kI+IE+gsmAEVlYw==}

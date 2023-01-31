@@ -1,7 +1,6 @@
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
-  InferGetStaticPropsType,
 } from 'next'
 import commerce from '@lib/api/commerce'
 import { Text } from '@components/ui'
