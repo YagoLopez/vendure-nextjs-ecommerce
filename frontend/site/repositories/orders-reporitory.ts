@@ -7,18 +7,24 @@ export default class OrdersRepository {
       activeOrder {
         id
         state
+        total
+        totalWithTax
+        totalQuantity
         lines {
+          unitPrice
+          taxRate
+          unitPriceWithTax
           productVariant {
             name
+            currencyCode
             product {
               featuredAsset {
                 source
               }
+              description
             }
           }
-          items {
-            unitPrice
-          }
+          quantity
         }
       }
     }

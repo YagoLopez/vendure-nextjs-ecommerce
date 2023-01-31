@@ -18,8 +18,8 @@ const LOCALES_MAP: Record<string, LOCALE_DATA> = {
   es: {
     name: 'Español',
     img: {
-      filename: 'flag-es-co.svg',
-      alt: 'Bandera Colombiana',
+      filename: 'flag-es.svg',
+      alt: 'Bandera Española',
     },
   },
   'en-US': {

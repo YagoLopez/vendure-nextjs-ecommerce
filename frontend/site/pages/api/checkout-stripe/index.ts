@@ -1,43 +1,55 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import OrdersRepository from '../../../repositories/orders-reporitory'
 
-const stripe = require('stripe')('sk_test_51MQY4aK9cXkj282noSPPEmFoIaQG4RCLF9ygKXqB66moQfPEKtSwpifb8Y9s3Vs6r1p63ttrPLQOAMtkZ7Caf53f000yT7aZge');
+const isProduction = process.env.NODE_ENV === 'production'
+const DUMMY_IMG = 'https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png'
+
+const stripe = require('stripe')('sk_test_51MQY4aK9cXkj282noSPPEmFoIaQG4RCLF9ygKXqB66moQfPEKtSwpifb8Y9s3Vs6r1p63ttrPLQOAMtkZ7Caf53f000yT7aZge')
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const authCookie = String(req.headers.cookie)
   const shopApiUrl = String(process.env.NEXT_PUBLIC_VENDURE_SHOP_API_URL)
   const ordersRepository = new OrdersRepository(shopApiUrl, authCookie)
-  const { activeOrder } = await ordersRepository.getActiveOrder()
+  try {
+    const { activeOrder: { lines }  } = await ordersRepository.getActiveOrder()
 
-  const params = {
-    payment_method_types: ['card'],
-    mode: 'payment',
-    metadata: {},
-    line_items: [{
-      price_data: {
-        currency: 'eur',
-        unit_amount: 2000,
-        product_data: {
-          name: 'Nike Air Force 1',
-          description: 'This is the product description',
-          images: [
-            'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bmlrZSUyMHNob2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          ]
+    const line_items = lines.map((line: any) => {
+      const {
+        unitPriceWithTax,
+        productVariant: { name, currencyCode, product },
+        quantity
+      } = line
+
+      return  {
+        price_data: {
+          currency: currencyCode,
+          unit_amount: unitPriceWithTax,
+          product_data: {
+            name,
+            description: product.description,
+            images: [isProduction ? product.featuredAsset.source.replace(/\\/g, '/') : DUMMY_IMG]
+          }
         },
-      },
-      quantity: 1,
-    }],
-    // success_url: `${req.headers.origin}?status=success&session_id={CHECKOUT_SESSION_ID}`,
-    // cancel_url: `${req.headers.origin}?status=cancelled`,
-    success_url: 'http://localhost:8000/profile',
-    cancel_url: 'http://localhost:8000/cart',
+        quantity
+      }
+    })
+
+    const params = {
+      payment_method_types: ['card'],
+      mode: 'payment',
+      metadata: {},
+      line_items,
+      success_url: `${process.env.URL_BASE}/profile`,
+      cancel_url: `${process.env.URL_BASE}/`,
+    }
+
+    const session = await stripe.checkout.sessions.create(params)
+    res.redirect(303, session.url);
+
+  } catch (e) {
+    res.status(402).json({error: (e as Record<string, any>).message})
 
   }
-
-  // const session = await stripe.checkout.sessions.create(params)
-  // console.log('session.url', session.url)
-  // res.redirect(303, session.url);
-  res.status(200).json({authCookie, activeOrder})
 }
 
