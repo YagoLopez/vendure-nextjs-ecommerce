@@ -10,6 +10,7 @@ import {
   SelectedOptions,
 } from '../helpers'
 import ErrorMessage from '@components/ui/ErrorMessage'
+import useCustomer from '@framework/customer/use-customer'
 
 interface ProductSidebarProps {
   product: Product
@@ -22,6 +23,8 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<null | Error>(null)
   const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({})
+  const {openModal} = useUI()
+  const { data: isCustomerLoggedIn } = useCustomer()
 
   useEffect(() => {
     selectDefaultOptionFromProduct(product, setSelectedOptions)
@@ -29,6 +32,10 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
 
   const variant = getProductVariant(product, selectedOptions)
   const addToCart = async () => {
+    if (!isCustomerLoggedIn) {
+      openModal()
+      return
+    }
     setLoading(true)
     setError(null)
     try {

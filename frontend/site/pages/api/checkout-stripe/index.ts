@@ -9,15 +9,27 @@ const stripe = require('stripe')('sk_test_51MQY4aK9cXkj282noSPPEmFoIaQG4RCLF9ygK
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const authCookie = String(req.headers.cookie)
-  const shopApiUrl = String(process.env.NEXT_PUBLIC_VENDURE_SHOP_API_URL)
-  const ordersRepository = new OrdersRepository(shopApiUrl, authCookie)
-  try {
-    const { activeOrder: { lines }  } = await ordersRepository.getActiveOrder()
+  const ordersRepository = new OrdersRepository(authCookie)
 
-    const line_items = lines.map((line: any) => {
+  try {
+    const { activeOrder: { code, lines, customer } } = await ordersRepository.getActiveOrder()
+
+    // (1) Set shipping address
+    const shippingAddress = ordersRepository.getShippingAddressCustomer(customer)
+    await ordersRepository.setShippingAddress(shippingAddress)
+
+    // (2) Set shipping methods
+    const {eligibleShippingMethods: shippingMethods} = await ordersRepository.getShippingMethods()
+    await ordersRepository.setShippingMethod(shippingMethods[0].id)
+
+    // (3) Transition order to "ArrangingPayment" state
+    await ordersRepository.transitionOrderToState("ArrangingPayment")
+
+    // (4) Transform line items
+    const line_items = lines.map((line: Record<string, any>) => {
       const {
         unitPriceWithTax,
-        productVariant: { name, currencyCode, product },
+        productVariant: { name, currencyCode, product: { description, featuredAsset} },
         quantity
       } = line
       return  {
@@ -26,8 +38,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           unit_amount: unitPriceWithTax,
           product_data: {
             name,
-            description: product.description,
-            images: [isProduction ? product.featuredAsset.source.replace(/\\/g, '/') : DUMMY_IMG]
+            description: description,
+            images: [isProduction ? featuredAsset.source.replace(/\\/g, '/') : DUMMY_IMG]
           }
         },
         quantity
@@ -39,15 +51,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       mode: 'payment',
       metadata: {},
       line_items,
-      success_url: `${process.env.URL_BASE}/profile`,
-      cancel_url: `${process.env.URL_BASE}/`,
+      success_url: `${process.env.URL_BASE}/success?code=${code}`,
+      cancel_url: `${process.env.URL_BASE}/cart`,
     }
 
     const session = await stripe.checkout.sessions.create(params)
     res.redirect(303, session.url);
 
+    // todo: this is for debugging. remove
+    // res.redirect(303, `/success?code=${code}`)
   } catch (e) {
-    res.status(402).json({error: (e as Record<string, any>).message})
+    res.status(402).json(e)
 
   }
 }

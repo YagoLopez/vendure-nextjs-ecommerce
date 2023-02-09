@@ -19,7 +19,6 @@ export default function CheckoutStripe({
   publishableKey: string;
   orderCode: string;
 }) {
-  debugger
   const options = {
     // passing the client secret obtained from the server
     // clientSecret,

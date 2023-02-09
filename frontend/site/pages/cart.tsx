@@ -4,10 +4,11 @@ import usePrice from '@framework/product/use-price'
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { Button, Text, Container } from '@components/ui'
-import { Bag, Cross, Check, MapPin, CreditCard } from '@components/icons'
+import { Bag, Cross, MapPin, CreditCard } from '@components/icons'
 import { CartItem } from '@components/cart'
 import { useUI } from '@components/ui/context'
-import React from 'react'
+import React, { FC } from 'react'
+import { useRouter } from 'next/router'
 
 export async function getStaticProps({
   preview,
@@ -25,8 +26,9 @@ export async function getStaticProps({
 }
 
 export default function Cart() {
+  const { query } = useRouter()
   const error = null
-  const success = null
+  const success = query.success === 'true'
   const { data, isLoading, isEmpty } = useCart()
   const { openSidebar, setSidebarView } = useUI()
 
@@ -49,16 +51,37 @@ export default function Cart() {
   }
 
   const onClick = () => {
-    // todo: review
     console.log('cart data', data)
-
-    // mutation{
-    //   transitionOrderToState(id:4, state: "Cancelled"){
-    //     __typename
-    //   }
-    // }
   }
 
+  const ProceedToCheckoutButton:
+    FC<{isCustomCheckout: boolean, checkoutSuccess: boolean, goToCheckout: () => void, total: string}>
+      = ({isCustomCheckout, checkoutSuccess, goToCheckout, total}) => {
+
+        if(checkoutSuccess) {
+          return null
+        } else {
+          if(isCustomCheckout){
+            return (
+              <Button Component="a" width="100%" onClick={goToCheckout}>
+                Proceed to Checkout ({total})
+              </Button>
+            )
+          } else {
+            return (
+              <>
+                <Button href="/checkoutstripe2" Component="a" width="100%">
+                  Proceed to Checkout
+                </Button>
+                <Button onClick={onClick}>Complete order</Button>
+                <Button href="/api/checkout-stripe" Component="a" width="100%">
+                  Proceed to Stripe Checkout 2
+                </Button>
+              </>
+            )
+          }
+        }
+  }
 
   return (
     <Container className="grid lg:grid-cols-12 pt-4 gap-20">
@@ -83,15 +106,6 @@ export default function Cart() {
             <h2 className="pt-6 text-xl font-light text-center">
               We couldn’t process the purchase. Please check your card
               information and try again.
-            </h2>
-          </div>
-        ) : success ? (
-          <div className="flex-1 px-4 flex flex-col justify-center items-center">
-            <span className="border border-white rounded-full flex items-center justify-center w-16 h-16">
-              <Check />
-            </span>
-            <h2 className="pt-6 text-xl font-light text-center">
-              Thank you for your order.
             </h2>
           </div>
         ) : (
@@ -182,23 +196,12 @@ export default function Cart() {
                   Continue Shopping
                 </Button>
               ) : (
-                <>
-                  {process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED ? (
-                    <Button Component="a" width="100%" onClick={goToCheckout}>
-                      Proceed to Checkout ({total})
-                    </Button>
-                  ) : (
-                    <>
-                      <Button href="/checkoutstripe2" Component="a" width="100%">
-                        Proceed to Checkout
-                      </Button>
-                      <Button onClick={onClick}>Complete order</Button>
-                      <Button href="/api/checkout-stripe" Component="a" width="100%">
-                        Proceed to Stripe Checkout 2
-                      </Button>
-                    </>
-                  )}
-                </>
+                <ProceedToCheckoutButton
+                  isCustomCheckout={Boolean(process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED)}
+                  checkoutSuccess={success}
+                  goToCheckout={goToCheckout}
+                  total={total}
+                />
               )}
             </div>
           </div>

@@ -109,7 +109,7 @@ const Layout: React.FC<Props> = ({
 }) => {
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
   const { locale = 'en-US' } = useRouter()
-  const navBarlinks = categories.slice(0, 2).map((c) => ({
+  const navBarlinks = categories.slice(0, 3).map((c) => ({
     label: c.name,
     href: `/search/${c.slug}`,
   }))

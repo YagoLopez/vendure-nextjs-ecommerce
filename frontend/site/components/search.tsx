@@ -148,10 +148,7 @@ export default function Search({ categories, brands }: SearchPropsType) {
                         )}
                       >
                         <Link
-                          href={{
-                            pathname: getCategoryPath(cat.path, brand),
-                            query,
-                          }}
+                          href={{pathname: `/search/${cat.slug}`}}
                           legacyBehavior
                         >
                           <a

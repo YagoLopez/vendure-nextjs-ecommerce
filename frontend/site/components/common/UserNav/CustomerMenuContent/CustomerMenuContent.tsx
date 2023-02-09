@@ -29,6 +29,7 @@ export default function CustomerMenuContent() {
   const logout = useLogout()
   const { pathname } = useRouter()
   const { theme, setTheme } = useTheme()
+  const currentTheme = theme === 'dark' ? 'light' : 'dark'
 
   function handleClick(_: React.MouseEvent<HTMLAnchorElement>, href: string) {
     router.push(href)
@@ -57,14 +58,11 @@ export default function CustomerMenuContent() {
       <DropdownMenuItem>
         <a
           className={cn(s.link, 'justify-between')}
-          onClick={() => {
-            setTheme(theme === 'dark' ? 'light' : 'dark')
-          }}
+          onClick={() => setTheme(currentTheme)}
         >
-            {theme === 'light' && <div>Theme: <strong>Dark</strong></div>}
-            {theme === 'dark' && <div>Theme: <strong>Light</strong></div>}
+          <div>Theme: <strong>{currentTheme}</strong></div>
           <div className="ml-3">
-            {theme == 'dark' ? (
+            {theme === 'light' ? (
               <Sun width={20} height={20} />
             ) : (
               <Moon width={20} height={20} />
@@ -75,7 +73,11 @@ export default function CustomerMenuContent() {
       <DropdownMenuItem>
         <a
           className={cn(s.link, 'border-t border-accent-2 mt-4')}
-          onClick={() => logout()}
+          onClick={() => {
+            alert('User logged out. Redirecting to start')
+            logout()
+            router.push('/')
+          }}
         >
           Logout
         </a>

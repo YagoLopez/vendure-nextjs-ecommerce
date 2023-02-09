@@ -32,7 +32,7 @@ const UserNav: React.FC<{
     ? DropdownTriggerInst
     : React.Fragment
 
-  const onClickLoginButton = () => isCustomerLoggedIn ? null : openModal()
+  const onClickUserIcon = () => isCustomerLoggedIn ? null : openModal()
 
   return (
     <nav className={cn(s.root, className)}>
@@ -71,7 +71,7 @@ const UserNav: React.FC<{
                 <div
                   aria-label="Menu"
                   className={s.avatarButton}
-                  onClick={onClickLoginButton}
+                  onClick={onClickUserIcon}
                 >
                   <UserIcon isCustomerLoggedIn={Boolean(isCustomerLoggedIn)} />
                 </div>
