@@ -1,56 +1,63 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
 import { Layout } from '@components/common'
 import { Button, Container } from '@components/ui'
 import { Check } from '@components/icons'
-import { useUI } from '@components/ui/context'
 import React from 'react'
-import { useRouter } from 'next/router'
 import OrdersRepository from '../repositories/orders-reporitory'
 
 // todo: avoid "any" type
 export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , orderByCode: any}> =
-  async ({ req, query }) => {
+  async ({ req, res, query }) => {
 
     if(!query.code || query.code === 'undefined') return {
       props: { paymentMethod: null, orderByCode: null }
     }
 
-    const authCookie = String(req.headers.cookie)
-    const ordersRepository = new OrdersRepository(authCookie)
-    const paymentMethod = await ordersRepository.createPayment()
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=10, stale-while-revalidate=59'
+    )
 
-    if(paymentMethod.method) {
-      await ordersRepository.addPayment(paymentMethod)
-    }
+    let response
+    try {
+      const authCookie = String(req.headers.cookie)
+      const ordersRepository = new OrdersRepository(authCookie)
+      const paymentMethod = await ordersRepository.createPayment()
 
-    const { orderByCode } = await ordersRepository.getOrderByCode(String(query.code))
-    return {
-      props: { paymentMethod, orderByCode },
+      if(paymentMethod.method) {
+        await ordersRepository.addPayment(paymentMethod)
+      }
+
+      const { orderByCode } = await ordersRepository.getOrderByCode(String(query.code))
+      response = {props: { paymentMethod, orderByCode, error: null}}
+
+    } catch (e) {
+      response = {props: { paymentMethod: null, orderByCode: null, error: null}}
+
     }
+    return response
 }
 
 export default function Cart({ paymentMethod, orderByCode }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-  const { query } = useRouter()
-  const error = null
-  const success = query.success === 'true'
-  const { data, isLoading, isEmpty } = useCart()
-  const { openSidebar, setSidebarView } = useUI()
+  const {
+    lines,
+    currencyCode,
+    subTotal,
+    subTotalWithTax,
+    total,
+    totalWithTax,
+    shippingWithTax,
+    taxSummary: [ taxSummary ],
+  } = orderByCode
+  const { taxRate, description: taxDescription } = taxSummary
 
-  const { price: subTotal } = usePrice(
-    data && {
-      amount: Number(data.subtotalPrice),
-      currencyCode: data.currency.code,
-    }
-  )
-  const { price: total } = usePrice(
-    data && {
-      amount: Number(data.totalPrice),
-      currencyCode: data.currency.code,
-    }
-  )
+  const { price: subTotalCurrency } = usePrice({ amount: subTotal, currencyCode })
+  const { price: subTotalCurrencyWithTax } = usePrice({ amount: subTotalWithTax, currencyCode })
+  const { price: totalCurrencyWithTax } = usePrice({ amount: totalWithTax, currencyCode })
+  const { price: shippingCurrencyWithTax } = usePrice({ amount: shippingWithTax, currencyCode })
+
 
   return (
     <Container className="grid lg:grid-cols-12 pt-4 gap-20">
@@ -62,34 +69,69 @@ export default function Cart({ paymentMethod, orderByCode }: InferGetServerSideP
           <h2 className="pt-6 text-xl font-light text-center">
             Thank you for your order.
           </h2>
-          <div>
-            PAYMENT METHOD<br/>
-            <pre>{JSON.stringify(paymentMethod, null, 2)}</pre>
-            <hr/>
-            <pre>{JSON.stringify(orderByCode, null, 2)}</pre>
+        </div>
+      </div>
+
+{/*
+      <div className="lg:px-0 sm:px-6 flex-1">
+        <Text variant="pageHeading">My Cart</Text>
+        <Text variant="sectionHeading">Review your Order</Text>
+        <ul className="py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-accent-2 border-b border-accent-2">
+
+
+          {lines.map((item: any) => (
+            <CartItem
+              key={item.id}
+              item={item}
+              currencyCode={currencyCode}
+            />
+          ))}
+
+
+        </ul>
+        <div className="my-6">
+          <Text>
+            Before you leave, take a look at these items. We picked them
+            just for you
+          </Text>
+          <div className="flex py-6 space-x-6">
+            {[1, 2, 3, 4, 5, 6].map((x) => (
+              <div
+                key={x}
+                className="border border-accent-3 w-full h-24 bg-accent-2 bg-opacity-50 transform cursor-pointer hover:scale-110 duration-75"
+              />
+            ))}
           </div>
         </div>
       </div>
+*/}
+
+
+
       <div className="lg:col-span-5">
         <div className="flex-shrink-0 px-4 py-24 sm:px-6">
           <div className="border-t border-accent-2">
             <ul className="py-3">
               <li className="flex justify-between py-1">
                 <span>Subtotal</span>
-                <span>{subTotal}</span>
+                <span>{subTotalCurrency}</span>
               </li>
               <li className="flex justify-between py-1">
-                <span>Taxes</span>
-                <span>Calculated at checkout</span>
+                <span>{taxDescription}</span>
+                <span>{taxRate} %</span>
+              </li>
+              <li className="flex justify-between py-1">
+                <span>Subtotal With Tax</span>
+                <span>{subTotalCurrencyWithTax}</span>
               </li>
               <li className="flex justify-between py-1">
                 <span>Estimated Shipping</span>
-                <span className="font-bold tracking-wide">FREE</span>
+                <span className="font-bold tracking-wide">{shippingCurrencyWithTax}</span>
               </li>
             </ul>
             <div className="flex justify-between border-t border-accent-2 py-3 font-bold mb-10">
               <span>Total</span>
-              <span>{total}</span>
+              <span>{totalCurrencyWithTax}</span>
             </div>
           </div>
           <div className="flex flex-row justify-end">

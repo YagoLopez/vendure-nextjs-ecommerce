@@ -50,10 +50,6 @@ export default function Cart() {
     setSidebarView('CHECKOUT_VIEW')
   }
 
-  const onClick = () => {
-    console.log('cart data', data)
-  }
-
   const ProceedToCheckoutButton:
     FC<{isCustomCheckout: boolean, checkoutSuccess: boolean, goToCheckout: () => void, total: string}>
       = ({isCustomCheckout, checkoutSuccess, goToCheckout, total}) => {
@@ -69,15 +65,9 @@ export default function Cart() {
             )
           } else {
             return (
-              <>
-                <Button href="/checkoutstripe2" Component="a" width="100%">
-                  Proceed to Checkout
-                </Button>
-                <Button onClick={onClick}>Complete order</Button>
-                <Button href="/api/checkout-stripe" Component="a" width="100%">
-                  Proceed to Stripe Checkout 2
-                </Button>
-              </>
+              <Button href="/api/checkout-stripe" Component="a" width="100%">
+                Proceed to Checkout
+              </Button>
             )
           }
         }

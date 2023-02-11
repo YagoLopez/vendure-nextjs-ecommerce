@@ -65,8 +65,9 @@ export default class OrdersRepository {
           state
           code
           active
-          customer{
-            addresses{
+          currencyCode
+          customer {
+            addresses {
               id
               streetLine1
               streetLine2
@@ -74,15 +75,24 @@ export default class OrdersRepository {
               province
               postalCode
               phoneNumber
-              country{
+              country {
                 name
                 code
               }
             }
           }
+          subTotal
+          subTotalWithTax
           total
           totalWithTax
           totalQuantity
+          taxSummary {
+            taxBase
+            taxRate
+            taxTotal
+            description
+          }
+          shippingWithTax
           lines {
             unitPrice
             taxRate
@@ -100,7 +110,7 @@ export default class OrdersRepository {
             quantity
           }
         }
-      }    
+      }
       `
     return this.graphQLClient.request(query, { code })
   }
@@ -226,6 +236,26 @@ export default class OrdersRepository {
       }   
     `
     return this.graphQLClient.request(query, { input: paymentData })
+  }
+
+  async getCustomerOrders() {
+    const query = gql`
+      query getCustomerOrders{
+        activeCustomer{
+          orders{
+            items{
+              code
+              totalWithTax
+              updatedAt
+              shipping
+            }
+            totalItems
+            __typename
+          }
+        }
+      }    
+      `
+    return this.graphQLClient.request(query)
   }
 
 }

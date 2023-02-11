@@ -55,11 +55,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       cancel_url: `${process.env.URL_BASE}/cart`,
     }
 
-    const session = await stripe.checkout.sessions.create(params)
-    res.redirect(303, session.url);
+    // const session = await stripe.checkout.sessions.create(params)
+    // res.redirect(303, session.url);
 
-    // todo: this is for debugging. remove
-    // res.redirect(303, `/success?code=${code}`)
+    // todo: this is for development. remove it
+    res.redirect(303, `/success?code=${code}`)
   } catch (e) {
     res.status(402).json(e)
 
