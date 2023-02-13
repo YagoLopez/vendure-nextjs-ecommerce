@@ -240,21 +240,24 @@ export default class OrdersRepository {
 
   async getCustomerOrders() {
     const query = gql`
-      query getCustomerOrders{
-        activeCustomer{
-          orders{
-            items{
+      query getCustomerOrders {
+        activeCustomer {
+          orders(options: { sort: { updatedAt: DESC } }) {
+            items {
+              state
               code
               totalWithTax
+              totalQuantity
               updatedAt
               shipping
+              currencyCode
             }
             totalItems
             __typename
           }
         }
-      }    
-      `
+      }
+    `
     return this.graphQLClient.request(query)
   }
 
