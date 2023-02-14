@@ -27,7 +27,7 @@ import {
   getDesignerPath,
   useSearchMeta,
 } from '@lib/search'
-import ErrorMessage from './ui/ErrorMessage'
+import ErrorMessages from './ui/ErrorMessage'
 
 export default function Search({ categories, brands }: SearchPropsType) {
   const [activeFilter, setActiveFilter] = useState('')
@@ -55,7 +55,7 @@ export default function Search({ categories, brands }: SearchPropsType) {
   })
 
   if (error) {
-    return <ErrorMessage error={error} />
+    return <ErrorMessages error={error} />
   }
 
   const handleClick = (event: any, filter: string) => {
@@ -103,7 +103,7 @@ export default function Search({ categories, brands }: SearchPropsType) {
             </div>
             <div
               className={`origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 mb-10 lg:block ${
-                activeFilter !== 'categories' || toggleFilter !== true
+                activeFilter !== 'categories' || !toggleFilter
                   ? 'hidden'
                   : ''
               }`}
@@ -200,7 +200,7 @@ export default function Search({ categories, brands }: SearchPropsType) {
             </div>
             <div
               className={`origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 mb-10 lg:block ${
-                activeFilter !== 'brands' || toggleFilter !== true
+                activeFilter !== 'brands' || !toggleFilter
                   ? 'hidden'
                   : ''
               }`}
@@ -374,7 +374,7 @@ export default function Search({ categories, brands }: SearchPropsType) {
             </div>
             <div
               className={`origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 mb-10 lg:block ${
-                activeFilter !== 'sort' || toggleFilter !== true ? 'hidden' : ''
+                activeFilter !== 'sort' || !toggleFilter ? 'hidden' : ''
               }`}
             >
               <div className="rounded-sm bg-accent-0 shadow-xs lg:bg-none lg:shadow-none">

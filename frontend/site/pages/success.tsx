@@ -5,6 +5,7 @@ import { Button, Container } from '@components/ui'
 import { Check } from '@components/icons'
 import React from 'react'
 import OrdersRepository from '../repositories/orders-reporitory'
+import setCacheHeaders from '@lib/setCacheHeaders'
 
 // todo: avoid "any" type
 export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , orderByCode: any}> =
@@ -14,10 +15,7 @@ export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , order
       props: { paymentMethod: null, orderByCode: null }
     }
 
-    res.setHeader(
-      'Cache-Control',
-      'public, s-maxage=10, stale-while-revalidate=59'
-    )
+    setCacheHeaders(res)
 
     let response
     try {
@@ -42,11 +40,9 @@ export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , order
 export default function Cart({ paymentMethod, orderByCode }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
   const {
-    lines,
     currencyCode,
     subTotal,
     subTotalWithTax,
-    total,
     totalWithTax,
     shippingWithTax,
     taxSummary: [ taxSummary ],
@@ -71,43 +67,6 @@ export default function Cart({ paymentMethod, orderByCode }: InferGetServerSideP
           </h2>
         </div>
       </div>
-
-{/*
-      <div className="lg:px-0 sm:px-6 flex-1">
-        <Text variant="pageHeading">My Cart</Text>
-        <Text variant="sectionHeading">Review your Order</Text>
-        <ul className="py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-accent-2 border-b border-accent-2">
-
-
-          {lines.map((item: any) => (
-            <CartItem
-              key={item.id}
-              item={item}
-              currencyCode={currencyCode}
-            />
-          ))}
-
-
-        </ul>
-        <div className="my-6">
-          <Text>
-            Before you leave, take a look at these items. We picked them
-            just for you
-          </Text>
-          <div className="flex py-6 space-x-6">
-            {[1, 2, 3, 4, 5, 6].map((x) => (
-              <div
-                key={x}
-                className="border border-accent-3 w-full h-24 bg-accent-2 bg-opacity-50 transform cursor-pointer hover:scale-110 duration-75"
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-*/}
-
-
-
       <div className="lg:col-span-5">
         <div className="flex-shrink-0 px-4 py-24 sm:px-6">
           <div className="border-t border-accent-2">

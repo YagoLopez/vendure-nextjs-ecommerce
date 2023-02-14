@@ -1,14 +1,14 @@
 import type { FC } from 'react'
 import cn from 'clsx'
 
+export interface ErrorMessage {
+  message: string
+  code?: string
+  errors?: { message: string }[]
+}
+
 interface ErrorMessageProps {
-  error: {
-    message: string
-    code?: string
-    errors?: {
-      message: string
-    }[]
-  }
+  error: ErrorMessage
   className?: string
 }
 

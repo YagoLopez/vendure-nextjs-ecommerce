@@ -4,11 +4,12 @@ import { Star } from '@components/icons'
 import cn from 'clsx'
 
 export interface RatingProps {
-  value: number
+  value: number,
+  classes?: string,
 }
 
-const Quantity: FC<RatingProps> = ({ value = 5 }) => (
-  <div className="flex flex-row py-6 text-accent-9">
+const Quantity: FC<RatingProps> = ({ value = 5, classes= 'py-6' }) => (
+  <div className={cn('flex flex-row text-accent-9', classes)}>
     {rangeMap(5, (i) => (
       <span
         key={`star_${i}`}

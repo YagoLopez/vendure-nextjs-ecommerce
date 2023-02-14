@@ -94,6 +94,7 @@ export default class OrdersRepository {
           }
           shippingWithTax
           lines {
+            id
             unitPrice
             taxRate
             unitPriceWithTax
@@ -101,6 +102,7 @@ export default class OrdersRepository {
               name
               currencyCode
               product {
+                slug
                 featuredAsset {
                   source
                 }
@@ -129,7 +131,7 @@ export default class OrdersRepository {
     return this.graphQLClient.request(mutation, { input: address })
   }
 
-  async getShippingAddressActiveOrder() {
+  async getShippingAddress() {
     const query = gql`
       query getActiveOrderShippingAddress {
         activeOrder {
