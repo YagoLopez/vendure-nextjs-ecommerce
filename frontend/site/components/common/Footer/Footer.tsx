@@ -35,6 +35,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
             <a
               href="https://yagolopez.js.org"
               target="_blank"
+              rel="noreferrer"
               className="flex flex-initial items-center"
             >
               <span className="rounded-full border border-accent-6 mr-2 hover:bg-accent-2">
