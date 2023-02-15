@@ -3,7 +3,6 @@ import { Layout } from '@components/common'
 import { Container, Text } from '@components/ui'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import OrdersRepository from '../repositories/orders-reporitory'
-import usePrice from '@framework/product/use-price'
 import { useRouter } from 'next/router'
 import setCacheHeaders from '@lib/setCacheHeaders'
 
@@ -55,10 +54,11 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
               {
                 customerOrders.map((order: any) => {
                   const {code, shipping, totalWithTax, totalQuantity, updatedAt, state, currencyCode } = order
-                  const { price: formattedTotalWithTax } = usePrice({ amount: totalWithTax, currencyCode })
+                  // todo: review
+                  // const { price: formattedTotalWithTax } = usePrice({ amount: totalWithTax, currencyCode })
                   return (
                     <tr
-                      id={code}
+                      key={code}
                       className="border-b border-opacity-20 border-gray-300 bg-gray-50 cursor-pointer hover:bg-accent-2 transition ease-in hover:underline hover:text-accent-3"
                       onClick={(e) => onClickOrder(e, code)}
                     >
@@ -79,7 +79,7 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
                         <p>{shipping}</p>
                       </td>
                       <td className="p-3 text-center">
-                        <p>{formattedTotalWithTax}</p>
+                        <p>{totalWithTax}</p>
                       </td>
                       <td className="p-3 text-center">
                         <p>{totalQuantity}</p>

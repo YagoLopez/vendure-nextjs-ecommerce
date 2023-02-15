@@ -6,8 +6,8 @@ import { validate } from 'email-validator'
 
 const LoginView: React.FC = () => {
   // Form State
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('testuser@testuser.com')
+  const [password, setPassword] = useState('testuser')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [dirty, setDirty] = useState(false)
@@ -78,8 +78,8 @@ const LoginView: React.FC = () => {
             </a>
           </div>
         )}
-        <Input type="email" placeholder="Email" onChange={setEmail} />
-        <Input type="password" placeholder="Password" onChange={setPassword} />
+        <Input type="email" placeholder="Email" onChange={setEmail} value="testuser@testuser.com" />
+        <Input type="password" placeholder="Password" onChange={setPassword} value="testuser" />
 
         <Button
           variant="slim"

@@ -9,6 +9,7 @@ import { Bag, Cross, Check } from '@components/icons'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
 import SidebarLayout from '@components/common/SidebarLayout'
+import CCTestData from '@components/ui/CCTestData'
 
 const CartSidebarView: FC = () => {
   const { closeSidebar, setSidebarView } = useUI()
@@ -35,7 +36,7 @@ const CartSidebarView: FC = () => {
   return (
     <SidebarLayout
       className={cn({
-        [s.empty]: error || success || isLoading || isEmpty,
+        [s.empty]: isLoading || isEmpty,
       })}
       handleClose={handleClose}
     >
@@ -78,6 +79,7 @@ const CartSidebarView: FC = () => {
                 My Cart
               </Text>
             </Link>
+            <CCTestData/>
             <ul className={s.lineItemsList}>
               {data!.lineItems.map((item: any) => (
                 <CartItem
@@ -114,7 +116,7 @@ const CartSidebarView: FC = () => {
                   Proceed to Checkout ({total})
                 </Button>
               ) : (
-                <Button href="/checkoutstripe2" Component="a" width="100%">
+                <Button href="/api/checkout-stripe" Component="a" width="100%">
                   Proceed to Checkout
                 </Button>
               )}

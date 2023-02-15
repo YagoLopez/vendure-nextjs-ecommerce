@@ -16,6 +16,8 @@ export default class OrdersRepository {
           id
           state
           code
+          shipping
+          currencyCode
           customer{
             addresses{
               id

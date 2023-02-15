@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const ordersRepository = new OrdersRepository(authCookie)
 
   try {
-    const { activeOrder: { code, lines, customer } } = await ordersRepository.getActiveOrder()
+    const { activeOrder: { code, lines, customer, currencyCode } } = await ordersRepository.getActiveOrder()
 
     // (1) Set shipping address
     const shippingAddress = ordersRepository.getShippingAddressCustomer(customer)
@@ -53,13 +53,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       line_items,
       success_url: `${process.env.URL_BASE}/success?code=${code}`,
       cancel_url: `${process.env.URL_BASE}/cart`,
+      shipping_options: [{
+        shipping_rate_data: {
+          display_name: 'Standard',
+          type: 'fixed_amount',
+          fixed_amount: {
+            amount: shippingMethods[0].price,
+            currency: currencyCode,
+          }
+        }
+      }]
     }
 
-    // const session = await stripe.checkout.sessions.create(params)
-    // res.redirect(303, session.url);
+    const session = await stripe.checkout.sessions.create(params)
+    res.redirect(303, session.url);
 
     // todo: this is for development. remove it
-    res.redirect(303, `/success?code=${code}`)
+    // res.redirect(303, `/success?code=${code}`)
   } catch (e) {
     res.status(402).json(e)
 

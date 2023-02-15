@@ -9,6 +9,7 @@ import { CartItem } from '@components/cart'
 import { useUI } from '@components/ui/context'
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
+import CCTestData from '@components/ui/CCTestData'
 
 export async function getStaticProps({
   preview,
@@ -165,13 +166,16 @@ export default function Cart() {
                 <span>Subtotal</span>
                 <span>{subTotal}</span>
               </li>
+              {/*todo: review taxes and shipping*/}
+{/*
               <li className="flex justify-between py-1">
                 <span>Taxes</span>
                 <span>Calculated at checkout</span>
               </li>
+*/}
               <li className="flex justify-between py-1">
                 <span>Estimated Shipping</span>
-                <span className="font-bold tracking-wide">FREE</span>
+                <span className="tracking-wide">5 $</span>
               </li>
             </ul>
             <div className="flex justify-between border-t border-accent-2 py-3 font-bold mb-10">
@@ -186,12 +190,15 @@ export default function Cart() {
                   Continue Shopping
                 </Button>
               ) : (
-                <ProceedToCheckoutButton
-                  isCustomCheckout={Boolean(process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED)}
-                  checkoutSuccess={success}
-                  goToCheckout={goToCheckout}
-                  total={total}
-                />
+                <div>
+                  <ProceedToCheckoutButton
+                    isCustomCheckout={Boolean(process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED)}
+                    checkoutSuccess={success}
+                    goToCheckout={goToCheckout}
+                    total={total}
+                  />
+                  <CCTestData/>
+                </div>
               )}
             </div>
           </div>

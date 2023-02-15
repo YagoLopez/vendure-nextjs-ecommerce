@@ -29,6 +29,12 @@ export const getServerSideProps: GetServerSideProps<{order: Record<string, any> 
   }
 
 export default function OrderDetailPage({order, error}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+  const { push } = useRouter()
+  const { code, lines, totalWithTax, currencyCode, state } = order as Record<string, any>
+  const { price: totalWithTaxFormatted } = usePrice({ amount: Number(totalWithTax), currencyCode })
+  const onClickProduct = (e: any, slug: string) => push(`/product/${slug}`)
+
   if (error) return (
     <>
       {error && (
@@ -43,28 +49,23 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
     </>
   )
 
-  const { push } = useRouter()
-  const { code, lines, totalWithTax, currencyCode, state } = order as Record<string, any>
-  const { price: totalWithTaxFormatted } = usePrice({ amount: Number(totalWithTax), currencyCode })
-  const onClickProduct = (e: any, slug: string) => push(`/product/${slug}`)
-
   return (
     <Container className="pt-4">
       <div className="lg:col-span-7">
         <div className="sm:px-6 flex-1">
+
           <Text variant="sectionHeading" className="p-12">
             Order Code: <span className="font-light text-accent-4 text-xl lg:text-2xl">{code}</span>
             <div>
               State: <span className="font-light text-accent-4 text-xl lg:text-2xl">
-                {state} | {state === 'AddingItems' && (
+                {state} {state === 'AddingItems' && (
                   <Link href="/cart" className="font-light text-accent-4 hover:underline text-xl lg:text-2xl">
-                    Go to cart →
+                    {' '} | Go to cart →
                   </Link>
                 )}
               </span>
             </div>
           </Text>
-
 
           {(lines as Record<string, any>).map((line: any) => {
             const { productVariant, quantity, id } = line
@@ -76,7 +77,7 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
                     <div className="lg:w-4/5 mx-auto flex flex-wrap">
                       <img alt="ecommerce"
                            onClick={(e) => onClickProduct(e, product.slug)}
-                           className="lg:w-1/2 lg:h-[360px] w-full object-cover object-center rounded border border-gray-200 cursor-pointer transform transition duration-200 hover:scale-105"
+                           className="lg:w-1/2 lg:h-[360px] w-full object-cover object-center rounded border border-gray-200 cursor-pointer transition duration-200 hover:scale-105"
                            src={product.featuredAsset.source}
                            title="See Product"
                       />
