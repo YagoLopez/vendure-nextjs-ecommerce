@@ -21,9 +21,10 @@ const CartSidebarView: FC = () => {
       currencyCode: data.currency.code,
     }
   )
+  // todo: avoid hardcoded shipping
   const { price: total } = usePrice(
     data && {
-      amount: Number(data.totalPrice),
+      amount: Number(data.totalPrice) + 5,
       currencyCode: data.currency.code,
     }
   )
@@ -103,7 +104,8 @@ const CartSidebarView: FC = () => {
               </li>
               <li className="flex justify-between py-1">
                 <span>Shipping</span>
-                <span className="font-bold tracking-wide">FREE</span>
+                {/*todo: avoid hardcoded shipping*/}
+                <span className="font-bold tracking-wide">5 €</span>
               </li>
             </ul>
             <div className="flex justify-between border-t border-accent-2 py-3 font-bold mb-2">

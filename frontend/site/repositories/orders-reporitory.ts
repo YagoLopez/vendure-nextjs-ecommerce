@@ -85,6 +85,7 @@ export default class OrdersRepository {
           }
           subTotal
           subTotalWithTax
+          shipping
           total
           totalWithTax
           totalQuantity

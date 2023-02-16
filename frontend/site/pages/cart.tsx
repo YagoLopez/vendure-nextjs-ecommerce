@@ -41,7 +41,7 @@ export default function Cart() {
   )
   const { price: total } = usePrice(
     data && {
-      amount: Number(data.totalPrice),
+      amount: Number(data.totalPrice) + 5,
       currencyCode: data.currency.code,
     }
   )
@@ -175,7 +175,7 @@ export default function Cart() {
 */}
               <li className="flex justify-between py-1">
                 <span>Estimated Shipping</span>
-                <span className="tracking-wide">5 $</span>
+                <span className="tracking-wide">{Number(data?.subtotalPrice) > 0 ? '5' : '0'} €</span>
               </li>
             </ul>
             <div className="flex justify-between border-t border-accent-2 py-3 font-bold mb-10">

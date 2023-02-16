@@ -1,6 +1,6 @@
 import usePrice from '@framework/product/use-price'
 import { Layout } from '@components/common'
-import { Text, Container, Rating } from '@components/ui'
+import { Container, Rating } from '@components/ui'
 import { Heart } from '@components/icons'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import OrdersRepository from '../../repositories/orders-reporitory'
@@ -30,10 +30,15 @@ export const getServerSideProps: GetServerSideProps<{order: Record<string, any> 
 
 export default function OrderDetailPage({order, error}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-  const { push } = useRouter()
-  const { code, lines, totalWithTax, currencyCode, state } = order as Record<string, any>
-  const { price: totalWithTaxFormatted } = usePrice({ amount: Number(totalWithTax), currencyCode })
+  const {
+    code, lines, subTotalWithTax, shipping, totalWithTax, taxSummary, currencyCode, state
+  } = order as Record<string, any>
+
+  const { price: subTotalWithTaxFormatted } = usePrice({ amount: Number(subTotalWithTax)/100, currencyCode })
+  const { price: shippingFormatted } = usePrice({ amount: Number(shipping)/100, currencyCode })
+  const { price: totalWithTaxFormatted } = usePrice({ amount: Number(totalWithTax)/100, currencyCode })
   const onClickProduct = (e: any, slug: string) => push(`/product/${slug}`)
+  const { push } = useRouter()
 
   if (error) return (
     <>
@@ -54,21 +59,27 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
       <div className="lg:col-span-7">
         <div className="sm:px-6 flex-1">
 
-          <Text variant="sectionHeading" className="p-12">
-            Order Code: <span className="font-light text-accent-4 text-xl lg:text-2xl">{code}</span>
+          <div className="font-bold px-12 py-2 lg:text-2xl">
+            <div>Order Code: <span className="font-light text-accent-4 text-xl lg:text-2xl">{code}</span></div>
+          </div>
+          <div className="font-medium px-12">
             <div>
-              State: <span className="font-light text-accent-4 text-xl lg:text-2xl">
-                {state} {state === 'AddingItems' && (
-                  <Link href="/cart" className="font-light text-accent-4 hover:underline text-xl lg:text-2xl">
-                    {' '} | Go to cart →
-                  </Link>
-                )}
+              State: <span className="font-light text-accent-4">
+                {state + ' '} {state === 'AddingItems' && (
+              <Link href="/cart" className="font-light text-accent-4 hover:bg-accent-2">
+                | Go to cart ➡️
+              </Link>
+            )}
               </span>
             </div>
-          </Text>
+            <div className="pb-1">Subtotal: <span className="font-light text-accent-4">{subTotalWithTaxFormatted}</span></div>
+            <div className="pb-1">Shipping: <span className="font-light text-accent-4">{shippingFormatted}</span></div>
+            <div className="pb-1">Tax Rate: <span className="font-light text-accent-4">{taxSummary[0]?.taxRate} %</span></div>
+            <div className="pb-1">Total with taxes: <span className="font-light text-accent-4">{totalWithTaxFormatted}</span></div>
+          </div>
 
           {(lines as Record<string, any>).map((line: any) => {
-            const { productVariant, quantity, id } = line
+            const { productVariant, quantity, id, unitPriceWithTax } = line
             const { product } = productVariant
             return (
               <Container key={id} className="max-w-none w-full" clean>
@@ -102,7 +113,7 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
                         </div>
                         <div className="flex">
                           <span className="title-font font-medium text-2xl text-gray-900">
-                            {totalWithTaxFormatted}
+                            {unitPriceWithTax / 100 } € EUR
                           </span>
                           <button
                             className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Button

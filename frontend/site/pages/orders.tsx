@@ -76,10 +76,11 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
                         </p>
                       </td>
                       <td className="p-3 text-center">
-                        <p>{shipping}</p>
+                        {/*todo: avoid hardcoded currency symbol*/}
+                        <p>{shipping/100} €</p>
                       </td>
                       <td className="p-3 text-center">
-                        <p>{totalWithTax}</p>
+                        <p>{totalWithTax/100} €</p>
                       </td>
                       <td className="p-3 text-center">
                         <p>{totalQuantity}</p>

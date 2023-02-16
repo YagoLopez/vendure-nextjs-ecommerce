@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , order
       response = {props: { paymentMethod, orderByCode, error: null}}
 
     } catch (e) {
-      response = {props: { paymentMethod: null, orderByCode: null, error: null}}
+      response = {props: { paymentMethod: null, orderByCode: null, error: null }}
 
     }
     return response
