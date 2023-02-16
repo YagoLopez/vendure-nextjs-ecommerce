@@ -1,6 +1,16 @@
-# Fullstack Ecommerce Platform
+# 🛍Fullstack Ecommerce Platform
 
 This is a monorepo containing both Frontend and Backend repositories
+
+## Demo
+- <u>Admin Dashboard:</u> 
+  - URL: https://vendure-backend.up.railway.app
+  - Credentials: **username**: superadmin - **password**: superadmin
+
+- <u>Frontend:</u>
+  - URL: https://yagolopez-ecommerce.up.railway.app
+  - Credentials: **username**: testuser@testuser.com - **password**: testuser
+
 
 ## Frontend
 
