@@ -12,7 +12,8 @@
     "prod:run:backend": "yarn --cwd backend start",
     "prod:run:frontend": "yarn --cwd frontend/site start",
     "prod:build:run:backend": "run-s prod:build:backend prod:run:backend",
-    "prod:build:run:frontend": "run-s prod:build:frontend prod:run:frontend"
+    "prod:build:run:frontend": "run-s prod:build:frontend prod:run:frontend",
+    "start": "yarn --cwd backend build"
   },
   "author": "yago.lopez@gmail.com",
   "license": "ISC",
