@@ -41,7 +41,7 @@ module.exports = withCommerceConfig({
     esmExternals: 'loose',
   },
   images: {
-    domains: ["okrmgl-3000.preview.csb.app"]
+    domains: ["vendure-backend.up.railway.app"]
   },
 })
 
