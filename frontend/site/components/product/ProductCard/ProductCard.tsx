@@ -50,8 +50,8 @@ const ProductCard: FC<Props> = ({
           </div>
           {product?.images && (
             <Image
-              quality="85"
-              src={product.images[0]?.url || placeholderImg}
+              quality="100"
+              src={product.images[0]?.url.replace(/\\/g, '/') || placeholderImg}
               alt={product.name || 'Product Image'}
               height={320}
               width={320}
