@@ -4,7 +4,7 @@ This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
 - <u>Admin Dashboard:</u> 
-  - URL: https://vendure-backend.up.railway.app
+  - URL: https://vendure-backend.up.railway.app/admin
   - Credentials: **username**: superadmin - **password**: superadmin
 
 - <u>Frontend:</u>
