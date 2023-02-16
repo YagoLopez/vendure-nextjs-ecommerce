@@ -1,0 +1,18 @@
+{
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "yarn prod:build:frontend"
+    }
+  ],
+  "tasks": {
+    "build:frontend": {
+      "name": "build:frontend",
+      "command": "cd frontend && pnpm build"
+    },
+    "start:frontend": {
+      "name": "start:frontend",
+      "command": "cd frontend && pnpm start"
+    }
+  }
+}
