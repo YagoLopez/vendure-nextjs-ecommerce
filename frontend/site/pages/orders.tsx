@@ -4,7 +4,7 @@ import { Container, Text } from '@components/ui'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import OrdersRepository from '../repositories/orders-repository'
 import { useRouter } from 'next/router'
-import setCacheHeaders from '@lib/setCacheHeaders'
+import setCacheHeaders, { getFormattedPrice } from '@lib/setCacheHeaders'
 
 export const getServerSideProps: GetServerSideProps<{customerOrders: Record<string, any> | null, error: unknown}> =
   async ({ req, res }) => {
@@ -53,12 +53,10 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
               {
                 customerOrders.map((order: any) => {
                   const {code, totalWithTax, totalQuantity, updatedAt, state, currencyCode } = order
-                  // todo: review
-                  // const { price: formattedTotalWithTax } = usePrice({ amount: totalWithTax, currencyCode })
                   return (
                     <tr
                       key={code}
-                      className="border-b border-opacity-20 border-gray-300 bg-gray-50 cursor-pointer hover:bg-accent-2 transition ease-in hover:underline hover:text-accent-3"
+                      className="border-b border-opacity-20 border-gray-300 bg-gray-50 cursor-pointer hover:bg-accent-2 p-2 transition ease-in hover:underline hover:text-accent-3"
                       onClick={(e) => onClickOrder(e, code)}
                     >
                       <td className="p-3 text-center">
@@ -75,7 +73,7 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
                         </p>
                       </td>
                       <td className="p-3 text-center">
-                        <p>{totalWithTax/100} €</p>
+                        <p>{getFormattedPrice(totalWithTax, currencyCode)}</p>
                       </td>
                       <td className="p-3 text-center">
                         <p>{totalQuantity}</p>

@@ -69,7 +69,7 @@ const I18nWidget: FC = () => {
         <div className="absolute top-0 right-0">
           {options?.length && display ? (
             <div className={s.dropdownMenu}>
-              <div className="flex flex-row justify-end px-6">
+              <div className="flex flex-row justify-end p-3">
                 <button
                   onClick={() => setDisplay(false)}
                   aria-label="Close panel"

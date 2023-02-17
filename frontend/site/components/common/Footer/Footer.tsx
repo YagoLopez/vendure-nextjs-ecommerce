@@ -41,7 +41,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               <span className="rounded-full border border-accent-6 mr-2 hover:bg-accent-2">
                 <Logo />
               </span>
-              <span className="hover:bg-accent-2 px-3 rounded-md">
+              <span className="hover:bg-accent-2 px-2 py-3 rounded-md">
                 Customized By Yago López
               </span>
             </a>

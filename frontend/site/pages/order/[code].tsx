@@ -1,4 +1,3 @@
-import usePrice from '@framework/product/use-price'
 import { Layout } from '@components/common'
 import { Container, Rating } from '@components/ui'
 import { ArrowLeft, Heart } from '@components/icons'
@@ -6,12 +5,13 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import OrdersRepository from '../../repositories/orders-repository'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import setCacheHeaders from '@lib/setCacheHeaders'
+import setCacheHeaders, { getFormattedPrice } from '@lib/setCacheHeaders'
 
 export const getServerSideProps: GetServerSideProps<{order: Record<string, any> | null, error: string | null}> =
   async ({ req, res, query }) => {
 
     setCacheHeaders(res)
+
     const orderCode = String(query.code)
     let result
 
@@ -29,16 +29,15 @@ export const getServerSideProps: GetServerSideProps<{order: Record<string, any> 
   }
 
 export default function OrderDetailPage({order, error}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-
   const {
     code, lines, subTotalWithTax, shipping, totalWithTax, taxSummary, currencyCode, state
   } = order as Record<string, any>
-
-  const { price: subTotalWithTaxFormatted } = usePrice({ amount: Number(subTotalWithTax)/100, currencyCode })
-  const { price: shippingFormatted } = usePrice({ amount: Number(shipping)/100, currencyCode })
-  const { price: totalWithTaxFormatted } = usePrice({ amount: Number(totalWithTax)/100, currencyCode })
-  const onClickProduct = (e: any, slug: string) => push(`/product/${slug}`)
   const { push } = useRouter()
+  const onClickProduct = (e: any, slug: string) => push(`/product/${slug}`)
+
+  const subTotalWithTaxFormatted = getFormattedPrice(subTotalWithTax, currencyCode)
+  const shippingFormatted = getFormattedPrice(shipping, currencyCode)
+  const totalWithTaxFormatted = getFormattedPrice(totalWithTax, currencyCode)
 
   if (error) return (
     <>
@@ -58,7 +57,6 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
     <Container className="pt-4">
       <div className="lg:col-span-7">
         <div className="sm:px-6 flex-1">
-
           <div className="font-bold px-12 py-2 lg:text-2xl">
             <div>Order Code: <span className="font-light text-accent-4 text-xl lg:text-2xl">{code}</span></div>
           </div>
@@ -73,15 +71,15 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
               </span>
             </div>
             <div className="pb-1">Subtotal: <span className="font-light text-accent-4">{subTotalWithTaxFormatted}</span></div>
+            <div className="pb-1">Included Tax Rate: <span className="font-light text-accent-4">{taxSummary[0]?.taxRate} %</span></div>
             <div className="pb-1">Shipping: <span className="font-light text-accent-4">{shippingFormatted}</span></div>
-            <div className="pb-1">Tax Rate: <span className="font-light text-accent-4">{taxSummary[0]?.taxRate} %</span></div>
             <div className="pb-1">Total with taxes: <span className="font-light text-accent-4">{totalWithTaxFormatted}</span></div>
-            <Link href="/orders" className="border-b flex font-light hover:text-accent-8 pb-2 text-accent-3 text-sm">
+            <Link href="/orders" className="border-b flex font-light hover:text-accent-8 hover:underline py-2 text-accent-3 text-sm">
               <ArrowLeft/> Back
             </Link>
           </div>
 
-          {(lines as Record<string, any>).map((line: any) => {
+          {(lines as Record<string, any>[]).map((line: any) => {
             const { productVariant, quantity, id, unitPriceWithTax } = line
             const { product } = productVariant
             return (
@@ -93,13 +91,13 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
                            onClick={(e) => onClickProduct(e, product.slug)}
                            className="lg:w-1/2 lg:h-[360px] w-full object-cover object-center rounded border border-gray-200 cursor-pointer transition duration-200 hover:scale-105"
                            src={product.featuredAsset.source}
-                           title="See Product"
+                           title="Product Detail"
                       />
                       <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                         <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
                         <h1
                           onClick={(e) => onClickProduct(e, product.slug)}
-                          className="text-gray-900 text-3xl title-font font-medium mb-1 cursor-pointer hover:text-accent-3" title="See Product">
+                          className="text-gray-900 text-3xl title-font font-medium mb-1 cursor-pointer hover:text-accent-3" title="Product Detail">
                           {productVariant.name}
                         </h1>
                         <div className="flex mb-4">
@@ -116,15 +114,17 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
                         </div>
                         <div className="flex">
                           <span className="title-font font-medium text-2xl text-gray-900">
-                            {unitPriceWithTax / 100 } € EUR
+                            {getFormattedPrice(unitPriceWithTax, currencyCode)}
                           </span>
                           <button
                             className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Button
                           </button>
                           <button
-                            onClick={() => alert('Add to favourite')}
-                            className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                            <Heart fill={'var(--accent-5)'} />
+                            onClick={() => alert('Add to favourites')}
+                            className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 transition hover:scale-110"
+                            title="Add to Favourites"
+                          >
+                            <Heart fill={'var(--accent-5)'} className="" />
                           </button>
                         </div>
                       </div>
