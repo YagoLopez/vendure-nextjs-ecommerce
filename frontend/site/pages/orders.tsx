@@ -2,7 +2,7 @@ import { Bag } from '@components/icons'
 import { Layout } from '@components/common'
 import { Container, Text } from '@components/ui'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import OrdersRepository from '../repositories/orders-reporitory'
+import OrdersRepository from '../repositories/orders-repository'
 import { useRouter } from 'next/router'
 import setCacheHeaders from '@lib/setCacheHeaders'
 

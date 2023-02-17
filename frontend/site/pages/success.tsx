@@ -4,7 +4,7 @@ import { Layout } from '@components/common'
 import { Button, Container } from '@components/ui'
 import { Check } from '@components/icons'
 import React from 'react'
-import OrdersRepository from '../repositories/orders-reporitory'
+import OrdersRepository from '../repositories/orders-repository'
 import setCacheHeaders from '@lib/setCacheHeaders'
 
 // todo: avoid "any" type
