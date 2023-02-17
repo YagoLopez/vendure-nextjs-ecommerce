@@ -1,4 +1,5 @@
 import cn from 'clsx'
+import Image from 'next/image'
 import s from './ProductView.module.css'
 import { FC } from 'react'
 import type { Product } from '@commerce/types/product'
@@ -35,7 +36,7 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
               <ProductSlider key={product.id}>
                 {product.images.map((image, i) => (
                   <div key={image.url} className={s.imageContainer}>
-
+                    {/*
                     <img
                       className={s.img}
                       src={image.url.replace(/\\/g, '/')!}
@@ -43,20 +44,16 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
                       width={600}
                       height={600}
                     />
-
-
-{/*
+                    */}
                     <Image
                       className={s.img}
-                      src={image.url!}
+                      src={image.url.replace(/\\/g, '/')!}
                       alt={image.alt || 'Product Image'}
                       width={600}
                       height={600}
                       priority={i === 0}
-                      quality="85"
+                      quality="100"
                     />
-*/}
-
                   </div>
                 ))}
               </ProductSlider>
