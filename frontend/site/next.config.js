@@ -41,6 +41,7 @@ module.exports = withCommerceConfig({
     esmExternals: 'loose',
   },
   images: {
+    unoptimized: true,
     domains: ["vendure-backend.up.railway.app"]
   },
 })

@@ -45,7 +45,6 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
                 <th className="p-3 font-medium text-center">Created</th>
                 <th className="p-3 font-medium text-center">Code</th>
                 <th className="p-3 font-medium text-center">State</th>
-                <th className="p-3 font-medium">Shipping</th>
                 <th className="p-3 font-medium text-center">Total</th>
                 <th className="p-3 font-medium">Items</th>
               </tr>
@@ -53,7 +52,7 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
               <tbody>
               {
                 customerOrders.map((order: any) => {
-                  const {code, shipping, totalWithTax, totalQuantity, updatedAt, state, currencyCode } = order
+                  const {code, totalWithTax, totalQuantity, updatedAt, state, currencyCode } = order
                   // todo: review
                   // const { price: formattedTotalWithTax } = usePrice({ amount: totalWithTax, currencyCode })
                   return (
@@ -74,10 +73,6 @@ export default function CustomerOrdersPage({customerOrders, error}: InferGetServ
                         <p className="px-3 py-1 font-semibold rounded-md bg-accent-2 border-2 border-gray-300">
                           {state}
                         </p>
-                      </td>
-                      <td className="p-3 text-center">
-                        {/*todo: avoid hardcoded currency symbol*/}
-                        <p>{shipping/100} €</p>
                       </td>
                       <td className="p-3 text-center">
                         <p>{totalWithTax/100} €</p>

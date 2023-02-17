@@ -67,7 +67,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               <a
                 className={s.link}
                 aria-label="Github Repository"
-                href="https://github.com/YagoLopez"
+                href="https://github.com/YagoLopez/vendure-nextjs-ecommerce"
               >
                 <Github />
               </a>

@@ -60,12 +60,12 @@ export default function CustomerMenuContent() {
           className={cn(s.link, 'justify-between')}
           onClick={() => setTheme(currentTheme)}
         >
-          <div>Theme: <strong>{currentTheme}</strong></div>
+          <div>Change Theme</div>
           <div className="ml-3">
             {theme === 'light' ? (
-              <Sun width={20} height={20} />
+                <Moon width={20} height={20} />
             ) : (
-              <Moon width={20} height={20} />
+              <Sun width={20} height={20} />
             )}
           </div>
         </a>

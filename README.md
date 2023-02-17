@@ -11,6 +11,9 @@ This is a monorepo containing both Frontend and Backend repositories
   - URL: https://yagolopez-ecommerce.up.railway.app
   - Credentials: **username**: testuser@testuser.com - **password**: testuser
 
+- <u>GraphQL API:</u>
+  - URL: https://vendure-backend.up.railway.app/shop-api
+
 
 ## Frontend
 
@@ -32,8 +35,8 @@ This is a monorepo containing both Frontend and Backend repositories
 
 - TailwindCSS
 
-- Other Features
-  - Stripe Checkout
+- Features
+  - [Stripe](https://stripe.io) Checkout
   
   - Shopping Cart
   
@@ -43,7 +46,7 @@ This is a monorepo containing both Frontend and Backend repositories
   
     
 
-[See more instructions on the Frontend README.md](./frontend/README.md) →
+[More information](./frontend/README.md) ➡️
 
 
 
@@ -74,4 +77,4 @@ This is a monorepo containing both Frontend and Backend repositories
 
   
 
-[See more instructions on the Backend README.md](./backend/README.md) →
+[More information](./backend/README.md) ➡️

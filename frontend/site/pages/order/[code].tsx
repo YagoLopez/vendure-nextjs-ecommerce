@@ -1,7 +1,7 @@
 import usePrice from '@framework/product/use-price'
 import { Layout } from '@components/common'
 import { Container, Rating } from '@components/ui'
-import { Heart } from '@components/icons'
+import { ArrowLeft, Heart } from '@components/icons'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import OrdersRepository from '../../repositories/orders-repository'
 import { useRouter } from 'next/router'
@@ -76,6 +76,9 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
             <div className="pb-1">Shipping: <span className="font-light text-accent-4">{shippingFormatted}</span></div>
             <div className="pb-1">Tax Rate: <span className="font-light text-accent-4">{taxSummary[0]?.taxRate} %</span></div>
             <div className="pb-1">Total with taxes: <span className="font-light text-accent-4">{totalWithTaxFormatted}</span></div>
+            <Link href="/orders" className="border-b flex font-light hover:text-accent-8 pb-2 text-accent-3 text-sm">
+              <ArrowLeft/> Back
+            </Link>
           </div>
 
           {(lines as Record<string, any>).map((line: any) => {
