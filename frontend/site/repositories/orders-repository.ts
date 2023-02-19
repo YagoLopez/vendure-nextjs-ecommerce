@@ -5,7 +5,7 @@ export default class OrdersRepository {
 
   private graphQLClient = new GraphQLClient(String(process.env.NEXT_PUBLIC_VENDURE_SHOP_API_URL))
 
-  constructor(private authCookie: string) {
+  constructor(private authCookie: string = '') {
     this.graphQLClient.setHeader('cookie', this.authCookie)
   }
 
@@ -18,8 +18,16 @@ export default class OrdersRepository {
           code
           shipping
           currencyCode
-          customer{
-            addresses{
+          createdAt
+          taxSummary{
+            description
+            taxBase
+            taxRate
+            taxTotal
+          }
+          customer {
+            id
+            addresses {
               id
               streetLine1
               streetLine2
@@ -27,31 +35,42 @@ export default class OrdersRepository {
               province
               postalCode
               phoneNumber
-              country{
+              country {
                 name
                 code
               }
             }
           }
-          state
+          subTotal
+          subTotalWithTax
           total
           totalWithTax
           totalQuantity
           lines {
+            id
             unitPrice
             taxRate
             unitPriceWithTax
+            discountedUnitPriceWithTax
+            featuredAsset {
+              preview
+            }
             productVariant {
+              id
               name
+              sku
               currencyCode
               product {
-                featuredAsset {
-                  source
-                }
+                id
+                slug
                 description
               }
             }
             quantity
+            discounts {
+              amount
+              amountWithTax
+            }
           }
         }
       }

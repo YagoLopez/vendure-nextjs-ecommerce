@@ -30,8 +30,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const line_items = lines.map((line: Record<string, any>) => {
       const {
         unitPriceWithTax,
-        productVariant: { name, currencyCode, product: { description, featuredAsset} },
-        quantity
+        productVariant: { name, currencyCode, product: { description} },
+        quantity,
+        featuredAsset,
       } = line
       return  {
         price_data: {
@@ -40,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           product_data: {
             name,
             description,
-            images: [isProduction ? featuredAsset.source.replace(/\\/g, '/') : DUMMY_IMG]
+            images: [isProduction ? featuredAsset.preview.replace(/\\/g, '/') : DUMMY_IMG]
           }
         },
         quantity
@@ -66,6 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }]
     }
 
+    // (5) Create Stripe Payment Session
     const session = await stripe.checkout.sessions.create(stripeCheckoutSessionParams)
     res.redirect(303, session.url);
 

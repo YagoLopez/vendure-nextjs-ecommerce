@@ -36,8 +36,8 @@ const CartItem = ({
   const updateItem = useUpdateItem({ item })
 
   const { price } = usePrice({
-    amount: item.variant.price * item.quantity,
-    baseAmount: item.variant.listPrice * item.quantity,
+    amount: item.variant.price * quantity,
+    baseAmount: item.variant.listPrice * quantity,
     currencyCode,
   })
 

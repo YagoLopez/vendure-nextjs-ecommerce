@@ -5,7 +5,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import OrdersRepository from '../../repositories/orders-repository'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import setCacheHeaders, { getFormattedPrice } from '@lib/setCacheHeaders'
+import setCacheHeaders, { getFormattedPrice } from '@lib/misc'
 
 export const getServerSideProps: GetServerSideProps<{order: Record<string, any> | null, error: string | null}> =
   async ({ req, res, query }) => {

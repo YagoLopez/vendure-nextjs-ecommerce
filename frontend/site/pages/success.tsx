@@ -1,11 +1,10 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import usePrice from '@framework/product/use-price'
 import { Layout } from '@components/common'
 import { Button, Container } from '@components/ui'
 import { Check } from '@components/icons'
 import React from 'react'
 import OrdersRepository from '../repositories/orders-repository'
-import setCacheHeaders from '@lib/setCacheHeaders'
+import setCacheHeaders, { getFormattedPrice } from '@lib/misc'
 
 // todo: avoid "any" type
 export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , orderByCode: any}> =
@@ -32,7 +31,6 @@ export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , order
 
     } catch (e) {
       response = {props: { paymentMethod: null, orderByCode: null, error: null }}
-
     }
     return response
 }
@@ -49,10 +47,10 @@ export default function Cart({ paymentMethod, orderByCode }: InferGetServerSideP
   } = orderByCode
 
   const { taxRate, description: taxDescription } = taxSummary
-  const { price: subTotalCurrency } = usePrice({ amount: subTotal/100, currencyCode })
-  const { price: subTotalCurrencyWithTax } = usePrice({ amount: subTotalWithTax/100, currencyCode })
-  const { price: totalCurrencyWithTax } = usePrice({ amount: totalWithTax/100, currencyCode })
-  const { price: shippingCurrencyWithTax } = usePrice({ amount: shippingWithTax/100, currencyCode })
+  const subTotalCurrency = getFormattedPrice(subTotal, currencyCode)
+  const subTotalCurrencyWithTax = getFormattedPrice(subTotalWithTax, currencyCode)
+  const totalCurrencyWithTax = getFormattedPrice(totalWithTax, currencyCode)
+  const shippingCurrencyWithTax = getFormattedPrice(shippingWithTax, currencyCode)
 
   return (
     <Container className="grid lg:grid-cols-12 pt-4 gap-20">

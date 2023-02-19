@@ -1,7 +1,5 @@
-import type { GetStaticPropsContext } from 'next'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
-import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { Button, Text, Container } from '@components/ui'
 import { Bag, Cross, MapPin, CreditCard } from '@components/icons'
@@ -10,38 +8,45 @@ import { useUI } from '@components/ui/context'
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
 import CCTestData from '@components/ui/CCTestData'
+import setCacheHeaders  from '@lib/misc'
+import OrdersRepository from '../repositories/orders-repository'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 
-export async function getStaticProps({
-  preview,
-  locale,
-  locales,
-}: GetStaticPropsContext) {
-  const config = { locale, locales }
-  const pagesPromise = commerce.getAllPages({ config, preview })
-  const siteInfoPromise = commerce.getSiteInfo({ config, preview })
-  const { pages } = await pagesPromise
-  const { categories } = await siteInfoPromise
-  return {
-    props: { pages, categories },
+export const getServerSideProps: GetServerSideProps<{taxData: Record<string, string | number> | null, shipping: number, error: string | null}> =
+  async ({ req, res, query }) => {
+
+    setCacheHeaders(res)
+
+    let props
+
+    try {
+      const authCookie = String(req.headers.cookie)
+      const ordersRepository = new OrdersRepository(authCookie)
+      const { activeOrder: { taxSummary: [taxData], shipping }  } = await ordersRepository.getActiveOrder()
+      props = { taxData: taxData, shipping, error: null }
+    } catch (e) {
+      props = { taxData: null, shipping: 0, error: (e as any).response?.errors[0].message ?? (e as any).message }
+    }
+    return {
+      props
+    }
   }
-}
 
-export default function Cart() {
+export default function Cart({taxData, shipping, error}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { query } = useRouter()
-  const error = null
   const success = query.success === 'true'
   const { data, isLoading, isEmpty } = useCart()
   const { openSidebar, setSidebarView } = useUI()
 
-  const { price: subTotal } = usePrice(
+  const { price: total } = usePrice(
     data && {
-      amount: Number(data.subtotalPrice),
+      amount: Number(data.totalPrice),
       currencyCode: data.currency.code,
     }
   )
-  const { price: total } = usePrice(
+  const { price: shippingPrice } = usePrice(
     data && {
-      amount: Number(data.totalPrice) + 5,
+      amount: Number(shipping/100),
       currencyCode: data.currency.code,
     }
   )
@@ -163,19 +168,21 @@ export default function Cart() {
           <div className="border-t border-accent-2">
             <ul className="py-3">
               <li className="flex justify-between py-1">
-                <span>Subtotal</span>
-                <span>{subTotal}</span>
+                {taxData && (
+                  <>
+                    <span>{taxData?.description}</span>
+                    <span>{taxData?.taxRate} %</span>
+                  </>
+                )}
               </li>
-              {/*todo: review taxes and shipping*/}
-{/*
               <li className="flex justify-between py-1">
-                <span>Taxes</span>
-                <span>Calculated at checkout</span>
-              </li>
-*/}
-              <li className="flex justify-between py-1">
-                <span>Estimated Shipping</span>
-                <span className="tracking-wide">{Number(data?.subtotalPrice) > 0 ? '5' : '0'} €</span>
+                {shipping ? (
+                  <>
+                    <span>Shipping Price</span>
+                    <span>{shippingPrice}</span>
+                  </>
+                  ) : <span>Shipping Price will be calculated at checkout</span>
+                }
               </li>
             </ul>
             <div className="flex justify-between border-t border-accent-2 py-3 font-bold mb-10">
