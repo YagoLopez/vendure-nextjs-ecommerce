@@ -36,7 +36,7 @@ This is a monorepo containing both Frontend and Backend repositories
 - TailwindCSS
 
 - Features
-  - [Stripe](https://stripe.io) Checkout
+  - [Stripe](https://stripe.com/es) Checkout
   
   - Shopping Cart
   

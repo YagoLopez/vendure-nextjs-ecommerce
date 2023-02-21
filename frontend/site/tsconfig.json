@@ -18,6 +18,7 @@
     "paths": {
       "@lib/*": ["lib/*"],
       "@utils/*": ["utils/*"],
+      "@respostories/*": ["repositories/*"],
       "@config/*": ["config/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],

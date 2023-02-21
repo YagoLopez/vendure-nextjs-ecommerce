@@ -48,6 +48,8 @@ const CheckoutSidebarView: FC = () => {
     }
   )
 
+  console.log('cart data', cartData)
+
   return (
     <SidebarLayout
       className={s.root}

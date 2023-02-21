@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import OrdersRepository from '../../../repositories/orders-repository'
+import OrdersRepository from '@respostories/orders-repository'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const DUMMY_IMG = 'https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png'
-
-// todo: move token to env file
-const stripe = require('stripe')('sk_test_51MQY4aK9cXkj282noSPPEmFoIaQG4RCLF9ygKXqB66moQfPEKtSwpifb8Y9s3Vs6r1p63ttrPLQOAMtkZ7Caf53f000yT7aZge')
+const stripe = require('stripe')(process.env.STRIPE_API_KEY)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 

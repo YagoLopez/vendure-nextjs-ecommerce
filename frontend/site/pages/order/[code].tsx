@@ -58,7 +58,7 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
       <div className="lg:col-span-7">
         <div className="sm:px-6 flex-1">
           <div className="font-bold px-12 py-2 lg:text-2xl">
-            <div>Order Code: <span className="font-light text-accent-4 text-xl lg:text-2xl">{code}</span></div>
+            <div>️🛒️️️ Order Code: <span className="font-light text-accent-4 text-xl lg:text-2xl">{code}</span></div>
           </div>
           <div className="font-medium px-12">
             <div>
