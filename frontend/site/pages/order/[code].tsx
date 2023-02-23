@@ -65,15 +65,15 @@ export default function OrderDetailPage({order, error}: InferGetServerSidePropsT
               State: <span className="font-light text-accent-4">
                 {state + ' '} {state === 'AddingItems' && (
               <Link href="/cart" className="font-light text-accent-4 hover:bg-accent-2">
-                | Go to cart ➡️
+                - Go to cart ➡️
               </Link>
             )}
               </span>
             </div>
             <div className="pb-1">Subtotal: <span className="font-light text-accent-4">{subTotalWithTaxFormatted}</span></div>
-            <div className="pb-1">Included Tax Rate: <span className="font-light text-accent-4">{taxSummary[0]?.taxRate} %</span></div>
-            <div className="pb-1">Shipping: <span className="font-light text-accent-4">{shippingFormatted}</span></div>
-            <div className="pb-1">Total with taxes: <span className="font-light text-accent-4">{totalWithTaxFormatted}</span></div>
+            <div className="pb-1">Tax Rate (Included in Subtotal): <span className="font-light text-accent-4">{taxSummary[0]?.taxRate} %</span></div>
+            <div className="pb-1">Shipping Costs: <span className="font-light text-accent-4">{shippingFormatted}</span></div>
+            <div className="pb-1">Total With Taxes and Shipping Costs: <span className="font-light text-accent-4">{totalWithTaxFormatted}</span></div>
             <Link href="/orders" className="border-b flex font-light hover:text-accent-8 hover:underline py-2 text-accent-3 text-sm">
               <ArrowLeft/> Back
             </Link>

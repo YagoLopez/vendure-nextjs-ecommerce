@@ -13,6 +13,25 @@ This is a monorepo containing both Frontend and Backend repositories
 
 - <u>GraphQL API:</u>
   - URL: https://vendure-backend.up.railway.app/shop-api
+  
+    
+  
+## Run Scripts
+
+From root project directory:
+
+```shell
+# Run backend in dev mode
+yarn run dev:run:backend
+
+# Run front in dev mode
+yarn run dev:run:frontend
+
+# List all posible scripts to run
+yarn run
+```
+
+
 
 
 ## Frontend
