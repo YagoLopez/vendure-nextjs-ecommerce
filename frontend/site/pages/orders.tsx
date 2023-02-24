@@ -2,11 +2,11 @@ import { Bag } from '@components/icons'
 import { Layout } from '@components/common'
 import { Container, Text } from '@components/ui'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import OrdersRepository from '../repositories/orders-repository'
+import OrdersRepository from '@lib/repositories/orders-repository'
 import { useRouter } from 'next/router'
 import setCacheHeaders, { getFormattedPrice } from '@lib/misc'
 
-export const getServerSideProps: GetServerSideProps<{customerOrders?: Record<string, any> | null}> =
+export const getServerSideProps: GetServerSideProps<{customerOrders?: Record<string, any>}> =
   async ({ req, res }) => {
 
     setCacheHeaders(res)

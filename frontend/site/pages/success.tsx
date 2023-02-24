@@ -3,7 +3,7 @@ import { Layout } from '@components/common'
 import { Button, Container } from '@components/ui'
 import { Check } from '@components/icons'
 import React from 'react'
-import OrdersRepository from '../repositories/orders-repository'
+import OrdersRepository from '@lib/repositories/orders-repository'
 import setCacheHeaders, { getFormattedPrice } from '@lib/misc'
 
 // todo: avoid "any" type

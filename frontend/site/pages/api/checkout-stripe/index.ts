@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import OrdersRepository from '@respostories/orders-repository'
+import OrdersRepository from '@lib/repositories/orders-repository'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const DUMMY_IMG = 'https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png'

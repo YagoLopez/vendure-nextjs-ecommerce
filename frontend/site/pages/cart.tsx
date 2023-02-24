@@ -9,11 +9,11 @@ import React, { FC } from 'react'
 import { useRouter } from 'next/router'
 import CCTestData from '@components/ui/CCTestData'
 import setCacheHeaders  from '@lib/misc'
-import OrdersRepository from '../repositories/orders-repository'
+import OrdersRepository from '@lib/repositories/orders-repository'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 
 export const getServerSideProps: GetServerSideProps<{taxData: Record<string, string | number> | null, shipping: number, error: string | null}> =
-  async ({ req, res, query }) => {
+  async ({ req, res }) => {
 
     setCacheHeaders(res)
 

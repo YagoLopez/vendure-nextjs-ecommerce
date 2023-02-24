@@ -2,17 +2,17 @@ import { Layout } from '@components/common'
 import { Container, Rating } from '@components/ui'
 import { ArrowLeft, Heart } from '@components/icons'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import OrdersRepository from '../../repositories/orders-repository'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import setCacheHeaders, { getFormattedPrice } from '@lib/misc'
+import OrdersRepository from '@lib/repositories/orders-repository'
 
 export const getServerSideProps: GetServerSideProps<{order: Record<string, any> | null, error: string | null}> =
   async ({ req, res, query }) => {
 
     setCacheHeaders(res)
 
-    const orderCode = String(query.code)
+    const orderCode = String(query.order_code)
     let result
 
     try {
