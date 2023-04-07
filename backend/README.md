@@ -122,3 +122,4 @@ You can revert the most recently-applied migration with:
 ```
 yarn migration:revert
 ```
+
