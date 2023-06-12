@@ -99,5 +99,11 @@
     "entrypoints": [
       "pages"
     ]
+  },
+  "engines": {
+    "node": ">=16.20.0",
+    "npm": "7.x",
+    "yarn": ">=1.19.0 < 2.0.0"
   }
+
 }
