@@ -94,6 +94,5 @@ yarn run
 
 - Relational Database (PostgreSQL, SQLite)
 
-  
 
 [More information](./backend/README.md) ➡️
