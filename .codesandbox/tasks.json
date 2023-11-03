@@ -2,12 +2,8 @@
   // These tasks will run in order when initializing your CodeSandbox project.
   "setupTasks": [
     {
-      "name": "Change dir",
-      "command": "cd backend"
-    },
-    {
-      "name": "Installing Dependencies",
-      "command": "pnpm install"
+      "name": "Start Dev",
+      "command": "yarn install"
     }
   ],
 
@@ -15,7 +11,11 @@
   "tasks": {
     "dev:run:backend": {
       "name": "dev:run:backend",
-      "command": "yarn dev:run:backend"
+      "command": "yarn dev:run:backend",
+      "runAtStart": true,
+      "preview": {
+        "port": 3000
+      }
     },
     "dev:run:frontend": {
       "name": "dev:run:frontend",
@@ -39,8 +39,7 @@
     },
     "prod:run:frontend": {
       "name": "prod:run:frontend",
-      "command": "yarn prod:run:frontend",
-      "runAtStart": true
+      "command": "yarn prod:run:frontend"
     },
     "prod:build:run:backend": {
       "name": "prod:build:run:backend",
