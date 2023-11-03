@@ -1,0 +1,54 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Change dir",
+      "command": "cd backend"
+    },
+    {
+      "name": "Installing Dependencies",
+      "command": "pnpm install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "dev:run:backend": {
+      "name": "dev:run:backend",
+      "command": "yarn dev:run:backend"
+    },
+    "dev:run:frontend": {
+      "name": "dev:run:frontend",
+      "command": "yarn dev:run:frontend"
+    },
+    "dev:run:all": {
+      "name": "dev:run:all",
+      "command": "yarn dev:run:all"
+    },
+    "prod:build:backend": {
+      "name": "prod:build:backend",
+      "command": "yarn prod:build:backend"
+    },
+    "prod:build:frontend": {
+      "name": "prod:build:frontend",
+      "command": "yarn prod:build:frontend"
+    },
+    "prod:run:backend": {
+      "name": "prod:run:backend",
+      "command": "yarn prod:run:backend"
+    },
+    "prod:run:frontend": {
+      "name": "prod:run:frontend",
+      "command": "yarn prod:run:frontend",
+      "runAtStart": true
+    },
+    "prod:build:run:backend": {
+      "name": "prod:build:run:backend",
+      "command": "yarn prod:build:run:backend"
+    },
+    "prod:build:run:frontend": {
+      "name": "prod:build:run:frontend",
+      "command": "yarn prod:build:run:frontend"
+    }
+  }
+}
