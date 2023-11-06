@@ -35,7 +35,9 @@ export const getServerSideProps: GetServerSideProps<{ paymentMethod: any , order
     return response
 }
 
-export default function Cart({ paymentMethod, orderByCode }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Cart({ orderByCode }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+  if(!orderByCode) return <div className="text-xl text-center">Order not found</div>
 
   const {
     currencyCode,
