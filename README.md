@@ -3,16 +3,16 @@
 This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
-- <u>Admin Dashboard:</u> 
-  - URL: https://vendure-backend.up.railway.app/admin
+- <u>Admin Dashboard (Backend):</u> 
+  - URL: https://9d8r4z-3000.csb.app/admin
   - Credentials: **username**: superadmin - **password**: superadmin
 
 - <u>Frontend:</u>
-  - URL: https://yagolopez-ecommerce.up.railway.app
+  - URL: https://jmynps-8000.csb.app
   - Credentials: **username**: testuser@testuser.com - **password**: testuser
 
 - <u>GraphQL API:</u>
-  - URL: https://vendure-backend.up.railway.app/shop-api
+  - URL: https://9d8r4z-3000.csb.app/admin/shop-api
   
     
   
