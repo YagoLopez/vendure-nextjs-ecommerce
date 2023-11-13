@@ -8,6 +8,7 @@ import {
   DropdownContent,
   DropdownMenuItem,
 } from '@components/ui/Dropdown/Dropdown'
+import { useUI } from '@components/ui'
 
 const LINKS = [
   {
@@ -30,8 +31,10 @@ export default function CustomerMenuContent() {
   const { pathname } = useRouter()
   const { theme, setTheme } = useTheme()
   const currentTheme = theme === 'dark' ? 'light' : 'dark'
+  const {closeSidebar} = useUI()
 
   function handleClick(_: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    closeSidebar()
     router.push(href)
   }
 
