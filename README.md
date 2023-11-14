@@ -3,16 +3,21 @@
 This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
-- <u>Admin Dashboard:</u> 
-  - URL: https://vendure-backend.up.railway.app/admin
-  - Credentials: **username**: superadmin - **password**: superadmin
-
+- <u>Admin Dashboard (Backend):</u> 
+  - URL: https://jmynps-3000.csb.app/admin
+  - Credentials: 
+    - **username**: "superadmin" 
+    - **password**: "superadmin"
+  
 - <u>Frontend:</u>
-  - URL: https://yagolopez-ecommerce.up.railway.app
-  - Credentials: **username**: testuser@testuser.com - **password**: testuser
-
+  
+  - URL: https://jmynps-8000.csb.app
+  - Credentials: 
+    - **username**: "testuser@testuser.com"
+    - **password**: "testuser"
+  
 - <u>GraphQL API:</u>
-  - URL: https://vendure-backend.up.railway.app/shop-api
+  - Server URL: https://jmynps-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
   
     
   
@@ -52,10 +57,10 @@ yarn run
 
 - Dark Mode Support
 
-- TailwindCSS
+- Tailwind CSS
 
 - Features
-  - [Stripe](https://stripe.com/es) Checkout
+  - [STRIPE](https://stripe.com/es) Checkout
   
   - Shopping Cart
   
@@ -80,7 +85,10 @@ yarn run
 
 - Created with the [NestJS Backend Framework](https://nestjs.com/)
 
-- AdminUI (Log in to the **Admin Dashboard** using the **username**: "superadmin" and **password**: "superadmin")
+- AdminUI: **Log in** to the Admin Dashboard
+  - **username**: "superadmin"
+
+  - **password**: "superadmin"
 
 - Roles and Permissions
 

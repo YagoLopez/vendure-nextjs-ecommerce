@@ -32,7 +32,7 @@ export default function CustomerOrdersPage({ customerOrders }: InferGetServerSid
 
   return (
     <Container className="pt-4">
-      <Text variant="pageHeading">My Orders</Text>
+      <Text variant="pageHeading" className="text-center">My Orders</Text>
 
       {customerOrders ? (
           <div className="container p-2 mx-auto sm:p-4 text-gray-800">
