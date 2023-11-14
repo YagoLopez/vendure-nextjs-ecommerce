@@ -4,7 +4,7 @@ This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
 - <u>Admin Dashboard (Backend):</u> 
-  - URL: https://9d8r4z-3000.csb.app/admin
+  - URL: https://jmynps-3000.csb.app/admin
   - Credentials: 
     - **username**: "superadmin" 
     - **password**: "superadmin"
@@ -17,7 +17,7 @@ This is a monorepo containing both Frontend and Backend repositories
     - **password**: "testuser"
   
 - <u>GraphQL API:</u>
-  - Server URL: https://9d8r4z-3000.csb.app/shop-api/?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
+  - Server URL: https://jmynps-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
   
     
   
