@@ -4,16 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:run:backend": "yarn --cwd backend dev",
-    "dev:run:frontend": "yarn --cwd frontend/site dev",
-    "dev:run:all": "run-p dev:run:backend dev:run:frontend",
-    "prod:build:backend": "yarn --cwd backend build",
-    "prod:build:frontend": "yarn --cwd frontend build",
-    "prod:run:backend": "yarn --cwd backend start",
-    "prod:run:frontend": "yarn --cwd frontend/site start",
-    "prod:build:run:backend": "run-s prod:build:backend prod:run:backend",
-    "prod:build:run:frontend": "run-s prod:build:frontend prod:run:frontend",
-
     "build:backend": "npm run build -w backend",
     "build:frontend": "npm run build -w frontend",
 

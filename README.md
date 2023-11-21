@@ -18,22 +18,40 @@ This is a monorepo containing both Frontend and Backend repositories
   
 - <u>GraphQL API:</u>
   - Server URL: https://zm9d74-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
-  
-    
+
+## Installation
+- Pnpm package manager needed
+- Clone the repository
+- Run in the command line:
+
+```shell
+# Change to /backend directory
+# Install backend dependencies
+pnpm install
+
+# Change to /frontend directory
+# Install frontend dependencies
+pnpm install
+
+# Change to root project directory
+# Install root dependencies
+pnpm install
+```    
   
 ## Run Scripts
 
-From root project directory:
+From **root** project directory:
 
 ```shell
+# List all scripts available
+npm run
+
 # Run backend in dev mode
-yarn run dev:run:backend
+npm run run:dev:backend
 
-# Run front in dev mode
-yarn run dev:run:frontend
+# Run frontend in dev mode
+npm run run:dev:frontend
 
-# List all posible scripts to run
-yarn run
 ```
 
 
