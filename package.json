@@ -17,13 +17,19 @@
     "build:backend": "npm run build -w backend",
     "build:frontend": "npm run build -w frontend",
 
-    "run:dev:backend2": "npm run dev:server -w backend",
-    "run:dev:frontend2": "npm run dev -w frontend",
-    "run:dev:all": "run-p run:dev:backend2 run:dev:frontend2",
+    "run:dev:backend": "npm run dev:server -w backend",
+    "run:dev:frontend": "npm run dev -w frontend",
+    "run:dev:all": "run-p run:dev:backend run:dev:frontend",
 
-    "run:prod:backend2": "npm run start:server -w backend",
-    "run:prod:frontend2": "npm run start -w frontend",
-    "run:prod:all": "run-p run:prod:backend2 run:prod:frontend2"
+    "run:prod:backend": "npm run start:server -w backend",
+    "run:prod:frontend": "npm run start -w frontend",
+    "run:prod:all": "run-p run:prod:backend run:prod:frontend",
+
+    "build:run:dev:backend": "run-s build:backend run:dev:backend",
+    "build:run:dev:frontend": "run-s build:frontend run:dev:frontend",
+
+    "build:run:prod:backend": "run-s build:backend run:prod:backend",
+    "build:run:prod:frontend": "run-s build:frontend run:prod:frontend"
   },
   "author": "yago.lopez@gmail.com",
   "license": "ISC",

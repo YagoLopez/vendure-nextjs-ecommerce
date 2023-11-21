@@ -46,6 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     })
 
+    //todo: get URL_BASE FROM browser history or similar
     const stripeCheckoutSessionParams = {
       payment_method_types: ['card'],
       mode: 'payment',
