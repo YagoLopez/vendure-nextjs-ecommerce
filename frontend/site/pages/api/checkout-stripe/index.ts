@@ -68,9 +68,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // (5) Create Stripe Payment Session
     const session = await stripe.checkout.sessions.create(stripeCheckoutSessionParams)
     res.redirect(303, session.url);
+    console.log('session.success_url', session.success_url)
+    console.log('session.cancel_url', session.cancel_url)
 
-    // todo: this is for development. remove it
-    // res.redirect(303, `/success?code=${code}`)
   } catch (e) {
     res.status(402).json(e)
 

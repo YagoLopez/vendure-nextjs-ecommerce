@@ -12,7 +12,18 @@
     "prod:run:backend": "yarn --cwd backend start",
     "prod:run:frontend": "yarn --cwd frontend/site start",
     "prod:build:run:backend": "run-s prod:build:backend prod:run:backend",
-    "prod:build:run:frontend": "run-s prod:build:frontend prod:run:frontend"
+    "prod:build:run:frontend": "run-s prod:build:frontend prod:run:frontend",
+
+    "build:backend": "npm run build -w backend",
+    "build:frontend": "npm run build -w frontend",
+
+    "run:dev:backend2": "npm run dev:server -w backend",
+    "run:dev:frontend2": "npm run dev -w frontend",
+    "run:dev:all": "run-p run:dev:backend2 run:dev:frontend2",
+
+    "run:prod:backend2": "npm run start:server -w backend",
+    "run:prod:frontend2": "npm run start -w frontend",
+    "run:prod:all": "run-p run:prod:backend2 run:prod:frontend2"
   },
   "author": "yago.lopez@gmail.com",
   "license": "ISC",
@@ -23,6 +34,7 @@
     "node": ">=16.20.0",
     "npm": "7.x",
     "yarn": ">=1.19.0 < 2.0.0"
-  }
+  },
+  "workspaces": ["backend", "frontend"]
 
 }
