@@ -4,20 +4,20 @@ This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
 - <u>Admin Dashboard (Backend):</u> 
-  - URL: https://wpwt3m-3000.csb.app/admin
+  - URL: https://v5khzx-3000.csb.app/admin
   - Credentials: 
     - **username**: "superadmin" 
     - **password**: "superadmin"
   
 - <u>Frontend:</u>
   
-  - URL: https://wpwt3m-8000.csb.app
+  - URL: https://v5khzx-8000.csb.app
   - Credentials: 
     - **username**: "testuser@testuser.com"
     - **password**: "testuser"
   
 - <u>GraphQL API:</u>
-  - Server URL: https://wpwt3m-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
+  - Server URL: https://v5khzx-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
 
 ## Installation
 - IMPORTANT: **Node version 16.20.0**
