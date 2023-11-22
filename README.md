@@ -20,9 +20,10 @@ This is a monorepo containing both Frontend and Backend repositories
   - Server URL: https://wpwt3m-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
 
 ## Installation
-- Pnpm package manager needed
-- Clone the repository
-- Run in the command line:
+- IMPORTANT: **Node version 16.20.0**
+- IMPORTANT: **Pnpm package manager** needed
+- Clone this repository
+- In the command line:
 
 ```shell
 # Change to /backend directory
