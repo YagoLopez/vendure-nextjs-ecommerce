@@ -46,14 +46,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     })
 
-    //todo: get URL_BASE FROM browser history or similar
+    const url_schema = process.env.NODE_ENV === "development" ? "http" : "https"
+    const hostname = req.headers.host
+    const success_url = `${url_schema}://${hostname}/success?code=${code}`
+    const cancel_url = `${url_schema}://${hostname}/cart`
+
     const stripeCheckoutSessionParams = {
       payment_method_types: ['card'],
       mode: 'payment',
       metadata: {},
       line_items,
-      success_url: `${process.env.URL_BASE}/success?code=${code}`,
-      cancel_url: `${process.env.URL_BASE}/cart`,
+      success_url,
+      cancel_url,
       shipping_options: [{
         shipping_rate_data: {
           display_name: 'Standard',
@@ -68,9 +72,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // (5) Create Stripe Payment Session
     const session = await stripe.checkout.sessions.create(stripeCheckoutSessionParams)
+
+    // (6) Redirect to Payment Url
     res.redirect(303, session.url);
-    console.log('session.success_url', session.success_url)
-    console.log('session.cancel_url', session.cancel_url)
 
   } catch (e) {
     res.status(402).json(e)
