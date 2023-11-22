@@ -1,0 +1,101 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "yarn install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "dev:run:backend": {
+      "name": "dev:run:backend",
+      "command": "yarn dev:run:backend",
+      "runAtStart": false
+    },
+    "dev:run:frontend": {
+      "name": "dev:run:frontend",
+      "command": "yarn dev:run:frontend",
+      "runAtStart": false
+    },
+    "dev:run:all": {
+      "name": "dev:run:all",
+      "command": "yarn dev:run:all",
+      "runAtStart": false
+    },
+    "prod:build:backend": {
+      "name": "prod:build:backend",
+      "command": "yarn prod:build:backend",
+      "runAtStart": false
+    },
+    "prod:build:frontend": {
+      "name": "prod:build:frontend",
+      "command": "yarn prod:build:frontend",
+      "runAtStart": false
+    },
+    "prod:run:backend": {
+      "name": "prod:run:backend",
+      "command": "yarn prod:run:backend",
+      "runAtStart": false
+    },
+    "prod:run:frontend": {
+      "name": "prod:run:frontend",
+      "command": "yarn prod:run:frontend",
+      "runAtStart": false
+    },
+    "prod:build:run:backend": {
+      "name": "prod:build:run:backend",
+      "command": "yarn prod:build:run:backend",
+      "runAtStart": false
+    },
+    "prod:build:run:frontend": {
+      "name": "prod:build:run:frontend",
+      "command": "yarn prod:build:run:frontend",
+      "runAtStart": false
+    },
+    "build:backend": {
+      "name": "build:backend",
+      "command": "yarn build:backend",
+      "runAtStart": false
+    },
+    "build:frontend": {
+      "name": "build:frontend",
+      "command": "yarn build:frontend",
+      "runAtStart": false
+    },
+    "run:dev:backend2": {
+      "name": "run:dev:backend2",
+      "command": "yarn run:dev:backend2",
+      "runAtStart": false
+    },
+    "run:dev:frontend2": {
+      "name": "run:dev:frontend2",
+      "command": "yarn run:dev:frontend2",
+      "runAtStart": false
+    },
+    "run:dev:all": {
+      "name": "run:dev:all",
+      "command": "yarn run:dev:all",
+      "runAtStart": false
+    },
+    "run:prod:backend2": {
+      "name": "run:prod:backend2",
+      "command": "yarn run:prod:backend2",
+      "runAtStart": false
+    },
+    "run:prod:frontend2": {
+      "name": "run:prod:frontend2",
+      "command": "yarn run:prod:frontend2",
+      "runAtStart": false,
+      "preview": {
+        "port": 8000
+      }
+    },
+    "run:prod:all": {
+      "name": "run:prod:all",
+      "command": "yarn run:prod:all",
+      "runAtStart": false
+    }
+  }
+}
