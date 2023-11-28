@@ -4,14 +4,14 @@ This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
 - <u>Admin Dashboard (Backend):</u> 
-  - URL: https://v5khzx-3000.csb.app/admin
+  - URL: https://ssq2lr-3000.csb.app/admin
   - Credentials: 
     - **username**: "superadmin" 
     - **password**: "superadmin"
   
 - <u>Frontend:</u>
   
-  - URL: https://v5khzx-8000.csb.app
+  - URL: https://ssq2lr-8000.csb.app
   - Credentials: 
     - **username**: "testuser@testuser.com"
     - **password**: "testuser"
@@ -96,7 +96,7 @@ npm run run:dev:frontend
 
 ## Backend
 
-- Based on the [Vendure Project](https://github.com/vendure-ecommerce/vendure): a modern, Open-Source Headless Commerce framework built with TypeScript & Nodejs
+- Based on the [Vendure Project](https://www.vendure.io): a modern, Open-Source Headless Commerce framework built with TypeScript & Nodejs
 
 - GraphQL API
 
