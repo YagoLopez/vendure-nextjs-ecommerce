@@ -17,7 +17,7 @@ This is a monorepo containing both Frontend and Backend repositories
     - **password**: "testuser"
 
 - <u>GraphQL API:</u>
-  - Server URL: https://v5khzx-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
+  - Server URL: https://ssq2lr-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
 
 ## Installation
 - IMPORTANT: **Node version 16.20.0**
