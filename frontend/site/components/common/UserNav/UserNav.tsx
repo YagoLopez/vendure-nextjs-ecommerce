@@ -40,6 +40,7 @@ const UserNav: React.FC<{
         {process.env.COMMERCE_CART_ENABLED && (
           <li className={s.item}>
             <Button
+              title="Shopping Cart"
               className={s.item}
               variant="naked"
               onClick={() => {

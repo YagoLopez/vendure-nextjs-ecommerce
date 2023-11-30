@@ -45,3 +45,4 @@ yarn-error.log*
 # Sqlite files
 /backend/vendure.sqlite-shm
 /backend/vendure.sqlite-wal
+/pnpm-lock.yaml
