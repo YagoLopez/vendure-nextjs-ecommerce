@@ -3,21 +3,21 @@
 This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
-- <u>Admin Dashboard (Backend):</u> 
-  - URL: https://v5khzx-3000.csb.app/admin
-  - Credentials: 
-    - **username**: "superadmin" 
+- <u>Admin Dashboard (Backend):</u>
+  - URL: https://ssq2lr-3000.csb.app/admin
+  - Credentials:
+    - **username**: "superadmin"
     - **password**: "superadmin"
-  
+
 - <u>Frontend:</u>
-  
-  - URL: https://v5khzx-8000.csb.app
-  - Credentials: 
+
+  - URL: https://ssq2lr-8000.csb.app
+  - Credentials:
     - **username**: "testuser@testuser.com"
     - **password**: "testuser"
-  
+
 - <u>GraphQL API:</u>
-  - Server URL: https://v5khzx-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
+  - Server URL: https://ssq2lr-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
 
 ## Installation
 - IMPORTANT: **Node version 16.20.0**
@@ -38,7 +38,7 @@ pnpm install
 # Install root dependencies
 pnpm install
 ```    
-  
+
 ## Run Scripts
 
 From **root** project directory:
@@ -80,14 +80,14 @@ npm run run:dev:frontend
 
 - Features
   - [STRIPE](https://stripe.com/es) Checkout
-  
+
   - Shopping Cart
-  
+
   - Search Products
-  
+
   - Customer Authentication
-  
-    
+
+
 
 [More information](./frontend/README.md) ➡️
 
@@ -96,7 +96,7 @@ npm run run:dev:frontend
 
 ## Backend
 
-- Based on the [Vendure Project](https://github.com/vendure-ecommerce/vendure): a modern, Open-Source Headless Commerce framework built with TypeScript & Nodejs
+- Based on the [Vendure Project](https://www.vendure.io): a modern, Open-Source Headless Commerce framework built with TypeScript & Nodejs
 
 - GraphQL API
 
