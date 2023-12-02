@@ -4,7 +4,7 @@ This is a monorepo containing both Frontend and Backend repositories
 
 ## Demo
 - <u>Admin Dashboard (Backend):</u>
-  - URL: https://ssq2lr-3000.csb.app/admin
+  - URL: https://pgrprv-3000.csb.app/admin
   - Credentials:
     - **username**: "superadmin"
     - **password**: "superadmin"
@@ -17,7 +17,7 @@ This is a monorepo containing both Frontend and Backend repositories
     - **password**: "testuser"
 
 - <u>GraphQL API:</u>
-  - Server URL: https://ssq2lr-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
+  - Server URL: https://pgrprv-3000.csb.app/shop-api?query=%7Bproducts%7Bitems%7Bname%7D%7D%7D
 
 ## Installation
 - IMPORTANT: **Node version 16.20.0**
