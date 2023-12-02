@@ -46,10 +46,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     })
 
-    const url_schema = process.env.NODE_ENV === "development" ? "http" : "https"
-    const hostname = req.headers.host
-    const success_url = `${url_schema}://${hostname}/success?code=${code}`
-    const cancel_url = `${url_schema}://${hostname}/cart`
+    // const url_schema = process.env.NODE_ENV === "development" ? "http" : "https"
+    // const hostname = req.headers.host
+    // const success_url = `${url_schema}://${hostname}/success?code=${code}`
+    // const cancel_url = `${url_schema}://${hostname}/cart`
+    const success_url = `https://pgrprv-8000.csb.app/success?code=${code}`
+    const cancel_url = `https://pgrprv-8000.csb.app/cart`
 
     const stripeCheckoutSessionParams = {
       payment_method_types: ['card'],
