@@ -26,7 +26,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-    - run: 'cd backend && pnpm install'
+        cache: 'yarn'
+    - run: 'cd backend && yarn install'
     #- run: npm run build --if-present
     #- run: npm test
