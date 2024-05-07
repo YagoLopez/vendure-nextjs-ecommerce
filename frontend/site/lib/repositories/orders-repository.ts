@@ -226,7 +226,7 @@ export default class OrdersRepository {
   }
 
   // todo: use enum for order state
-  async transitionOrderToState(state: string) {
+  async transitionActiveOrderToState(state: string) {
     const query = gql`
       mutation TransitionOrder($state: String!) {
         transitionOrderToState(state: $state) {
@@ -235,7 +235,7 @@ export default class OrdersRepository {
             message
           }
         }
-      }    
+      }
     `
     return this.graphQLClient.request(query, {state})
   }
@@ -257,7 +257,7 @@ export default class OrdersRepository {
             message
           }
         }
-      }   
+      }
     `
     return this.graphQLClient.request(query, { input: paymentData })
   }

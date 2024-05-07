@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps<any> =
     try {
       const authCookie = String(req.headers.cookie)
       const customerRepository = new CustomerRepository(authCookie)
-      const { activeCustomer  } = await customerRepository.getActiveCustomer()
+      const activeCustomer = await customerRepository.getActiveCustomer()
       props = { activeCustomer }
       if (!activeCustomer) notFound = true
     } catch (e) {

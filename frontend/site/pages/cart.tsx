@@ -22,6 +22,7 @@ export const getServerSideProps: GetServerSideProps<{taxData: Record<string, str
     try {
       const authCookie = String(req.headers.cookie)
       const ordersRepository = new OrdersRepository(authCookie)
+      await ordersRepository.transitionActiveOrderToState("AddingItems")
       const { activeOrder: { taxSummary: [taxData], shipping }  } = await ordersRepository.getActiveOrder()
       props = { taxData: taxData, shipping, error: null }
     } catch (e) {

@@ -32,10 +32,11 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
 
   const variant = getProductVariant(product, selectedOptions)
   const addToCart = async () => {
-    if (!isCustomerLoggedIn) {
-      openModal()
-      return
-    }
+    // Disable Login/Signup button when anonymous customers are allowed to check out as guest
+    // if (!isCustomerLoggedIn) {
+    //   openModal()
+    //   return
+    // }
     setLoading(true)
     setError(null)
     try {
@@ -98,7 +99,7 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
         <Collapse title="Details">
           This is a limited edition production run. Printing starts when the
           drop ends. Reminder: Bad Boys For Life. Shipping may take 10+ days due
-          to COVID-19.
+          to delays.
         </Collapse>
       </div>
     </div>
